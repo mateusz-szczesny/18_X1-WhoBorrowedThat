@@ -20,6 +20,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setElevation(0);
         final EditText emailText = findViewById(R.id.editTextEmail);
         final EditText passowrdText = findViewById(R.id.editTextPassword);
         Button loginButton = findViewById(R.id.buttonSignIn);
