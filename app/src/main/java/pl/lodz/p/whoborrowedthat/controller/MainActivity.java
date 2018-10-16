@@ -17,7 +17,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setElevation(0);
         loginButton = findViewById(R.id.loginButton);
         loginGoogleButton = findViewById(R.id.loginGoogleButton);
         registerButton = findViewById(R.id.registerButton);
