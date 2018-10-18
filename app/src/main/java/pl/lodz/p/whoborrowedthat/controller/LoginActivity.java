@@ -1,5 +1,6 @@
 package pl.lodz.p.whoborrowedthat.controller;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -40,6 +41,8 @@ public class LoginActivity extends AppCompatActivity {
                                     String.format(responseUser.getToken()),
                                     Toast.LENGTH_LONG)
                                     .show();
+                            Intent intent = new Intent(LoginActivity.this, BorrowLentListActivity.class);
+                            LoginActivity.this.startActivity(intent);
                         } else {
                             Toast.makeText(LoginActivity.this,
                                     String.format("Response is %s", String.valueOf(response.code()))
