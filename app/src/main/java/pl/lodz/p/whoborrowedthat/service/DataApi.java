@@ -1,7 +1,5 @@
 package pl.lodz.p.whoborrowedthat.service;
 
-import android.arch.lifecycle.LiveData;
-
 import java.util.List;
 
 import pl.lodz.p.whoborrowedthat.model.Borrow;
@@ -15,5 +13,10 @@ public interface DataApi {
     @GET("v1/endpoint/to/stuff")
     @FormUrlEncoded
     Call<List<Borrow>> getBorrowedThingsByUserId(@Field("token") String token,
+                                                 @Field("id") long userId);
+
+    @GET("v1/endpoint/to/stuff")
+    @FormUrlEncoded
+    Call<List<Borrow>> getLentThingsByUserId(@Field("token") String token,
                                                  @Field("id") long userId);
 }
