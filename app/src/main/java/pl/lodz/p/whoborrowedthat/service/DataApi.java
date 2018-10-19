@@ -7,16 +7,16 @@ import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface DataApi {
 
-    @GET("v1/endpoint/to/stuff")
-    @FormUrlEncoded
-    Call<List<Borrow>> getBorrowedThingsByUserId(@Field("token") String token,
-                                                 @Field("id") long userId);
+    @GET("v1/stuff/borrowed")
+    Call<List<Borrow>> getBorrowedThingsByUserId(@Query("token") String token,
+                                                 @Query("id") String userId);
 
-    @GET("v1/endpoint/to/stuff")
-    @FormUrlEncoded
-    Call<List<Borrow>> getLentThingsByUserId(@Field("token") String token,
-                                                 @Field("id") long userId);
+    @GET("v1/stuff/lent")
+    Call<List<Borrow>> getLentThingsByUserId(@Query("token") String token,
+                                             @Query("id") String userId);
 }
