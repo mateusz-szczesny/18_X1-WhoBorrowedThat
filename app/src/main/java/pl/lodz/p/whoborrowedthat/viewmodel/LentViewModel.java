@@ -10,17 +10,17 @@ import pl.lodz.p.whoborrowedthat.model.Stuff;
 import pl.lodz.p.whoborrowedthat.model.User;
 import pl.lodz.p.whoborrowedthat.service.ApiManager;
 
-public class BorrowViewModel extends AndroidViewModel {
-    private final LiveData<List<Stuff>> allBorrows;
+public class LentViewModel extends AndroidViewModel {
+    private final LiveData<List<Stuff>> allLents;
     private final ApiManager apiManager;
 
-    public BorrowViewModel(Application application) {
+    public LentViewModel(Application application) {
         super(application);
         apiManager = ApiManager.getInstance();
-        allBorrows = apiManager.getStuff(ApiManager.Stuff.BORROWED, new User());
+        allLents = apiManager.getStuff(ApiManager.Stuff.LENT, new User());
     }
 
-    public LiveData<List<Stuff>> getAllBorrows() {
-        return allBorrows;
+    public LiveData<List<Stuff>> getAllLents() {
+        return allLents;
     }
 }
