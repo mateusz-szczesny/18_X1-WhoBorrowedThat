@@ -68,6 +68,7 @@ public class LentListFragment extends Fragment {
 
     private void setWelcome(View view) {
         TextView title = view.findViewById(R.id.title);
-        title.setText(getUserFormSP(getActivity().getApplication()).getEmail() + " - Lent List");
+        String email = getUserFormSP(getActivity().getApplication()).getEmail();
+        title.setText(email + " - Lent List");
     }
 }

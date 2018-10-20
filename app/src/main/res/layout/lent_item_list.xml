@@ -8,7 +8,7 @@ android:layout_height="match_parent"
 tools:context=".controller.LentListFragment">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="LENT LIST TITLE / TEST" />
@@ -21,6 +21,6 @@ tools:context=".controller.LentListFragment">
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
 </android.support.constraint.ConstraintLayout>
