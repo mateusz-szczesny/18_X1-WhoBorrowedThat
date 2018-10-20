@@ -65,7 +65,17 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         });
+
+        isUserAlreadyLoggedIn();
     }
+
+    private void isUserAlreadyLoggedIn() {
+        SharedPreferences sharedPref = getSharedPreferences(ConstHelper.USER__SP, Context.MODE_PRIVATE);
+        if (sharedPref.getBoolean(ConstHelper.USER_LOGIN_STATUS__SP, false)){
+            onLogInSuccess();
+        }
+    }
+
 
     private void storeUserInSharedPrefs(User user) {
         SharedPreferences sharedPref = getSharedPreferences(ConstHelper.USER__SP, Context.MODE_PRIVATE);
