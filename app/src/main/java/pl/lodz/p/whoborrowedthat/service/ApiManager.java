@@ -56,7 +56,7 @@ public class ApiManager {
 
     private MutableLiveData<List<Borrow>> getLentStuff(User user) {
         final MutableLiveData<List<Borrow>> data = new MutableLiveData<>();
-        dataService.getLentThingsByUserId(user.getToken(), user.getId()).enqueue(new Callback<List<Borrow>>() {
+        dataService.getLentThingsByUserId(user.getToken(), String.valueOf(user.getId())).enqueue(new Callback<List<Borrow>>() {
             @Override
             public void onResponse(Call<List<Borrow>> call, Response<List<Borrow>> response) {
                 data.setValue(response.body());
@@ -72,7 +72,7 @@ public class ApiManager {
 
     private MutableLiveData<List<Borrow>> getBorrowedStuff(User user) {
         final MutableLiveData<List<Borrow>> data = new MutableLiveData<>();
-        dataService.getBorrowedThingsByUserId(user.getToken(), user.getId()).enqueue(new Callback<List<Borrow>>() {
+        dataService.getBorrowedThingsByUserId(user.getToken(), String.valueOf(user.getId())).enqueue(new Callback<List<Borrow>>() {
             @Override
             public void onResponse(Call<List<Borrow>> call, Response<List<Borrow>> response) {
                 data.setValue(response.body());

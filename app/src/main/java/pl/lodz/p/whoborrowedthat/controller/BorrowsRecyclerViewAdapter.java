@@ -1,5 +1,8 @@
 package pl.lodz.p.whoborrowedthat.controller;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,72 +10,66 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import pl.lodz.p.whoborrowedthat.R;
-import pl.lodz.p.whoborrowedthat.controller.BorrowFragment.OnListFragmentInteractionListener;
-import pl.lodz.p.whoborrowedthat.controller.dummy.DummyContent.DummyItem;
+import pl.lodz.p.whoborrowedthat.model.Borrow;
+import pl.lodz.p.whoborrowedthat.viewmodel.BorrowViewModel;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class BorrowsRecyclerViewAdapter extends RecyclerView.Adapter<BorrowsRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
-    private final OnListFragmentInteractionListener mListener;
-
-    public BorrowsRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
-        mValues = items;
-        mListener = listener;
+    public void setVM(BorrowViewModel bvm) {
+        this.bvm = bvm;
     }
 
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.borrow_item, parent, false);
-        return new ViewHolder(view);
+    private BorrowViewModel bvm;
+    private final LayoutInflater inflater;
+    private List<Borrow> borrows ;
+
+    public BorrowsRecyclerViewAdapter(Context context) {
+        inflater = LayoutInflater.from(context);
     }
 
+    @NonNull
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+    public BorrowsRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = inflater.inflate(R.layout.borrow_item, parent, false);
+        return new ViewHolder(itemView);
+    }
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
-                }
-            }
-        });
+    @SuppressLint({"RecyclerView", "SetTextI18n"})
+    @Override
+    public void onBindViewHolder(@NonNull BorrowsRecyclerViewAdapter.ViewHolder holder, final int position) {
+        if (borrows != null) {
+            final Borrow current = borrows.get(position);
+            //TODO: set specific data for one item after layout specified
+            holder.id.setText(current.getName());
+            holder.content.setText(current.getDesc());
+        } else {
+            holder.content.setText("Name not found...");
+        }
+    }
+
+    public void setBorrows(List<Borrow> borrows){
+        this.borrows = borrows;
+        notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        if (borrows != null)
+            return borrows.size();
+        else return 0;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
+    //TODO: set specific data for one item after layout specified
+    class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView id;
+        private final TextView content;
 
-        public ViewHolder(View view) {
-            super(view);
-            mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
-        }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+        private ViewHolder(View itemView) {
+            super(itemView);
+            id = itemView.findViewById(R.id.item_number);
+            content = itemView.findViewById(R.id.content);
         }
     }
 }
