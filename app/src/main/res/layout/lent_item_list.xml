@@ -7,13 +7,20 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".controller.LentListFragment">
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LENT LIST TITLE / TEST" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/listOfBorrowedStuff"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="415dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
 </android.support.constraint.ConstraintLayout>
