@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import pl.lodz.p.whoborrowedthat.R;
 import pl.lodz.p.whoborrowedthat.adapter.BorrowsRecyclerViewAdapter;
@@ -19,6 +20,8 @@ import pl.lodz.p.whoborrowedthat.model.Stuff;
 import pl.lodz.p.whoborrowedthat.viewmodel.BorrowViewModel;
 
 import java.util.List;
+
+import static pl.lodz.p.whoborrowedthat.helper.SharedPrefHelper.getUserFormSP;
 
 public class BorrowListFragment extends Fragment {
 
@@ -44,6 +47,8 @@ public class BorrowListFragment extends Fragment {
         Context context = view.getContext();
         RecyclerView recyclerView = view.findViewById(R.id.listOfBorrowedStuff);
 
+        setWelcome(view);
+
         final BorrowsRecyclerViewAdapter borrowsRecyclerViewAdapter = new BorrowsRecyclerViewAdapter(context);
         recyclerView.setAdapter(borrowsRecyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -59,5 +64,10 @@ public class BorrowListFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void setWelcome(View view) {
+        TextView title = view.findViewById(R.id.title);
+        title.setText(getUserFormSP(getActivity().getApplication()).getEmail() + " - Borrowed List");
     }
 }

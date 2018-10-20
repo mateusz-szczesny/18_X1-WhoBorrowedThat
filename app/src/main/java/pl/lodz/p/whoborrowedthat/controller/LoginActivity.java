@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void storeUserInSharedPrefs(User user) {
-        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getSharedPreferences(ConstHelper.USER__SP, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean(ConstHelper.USER_LOGIN_STATUS__SP, true);
         editor.putString(ConstHelper.USER_DATA__SP, new Gson().toJson(user));

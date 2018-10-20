@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -19,6 +20,8 @@ import pl.lodz.p.whoborrowedthat.R;
 import pl.lodz.p.whoborrowedthat.adapter.LentRecyclerViewAdapter;
 import pl.lodz.p.whoborrowedthat.model.Stuff;
 import pl.lodz.p.whoborrowedthat.viewmodel.LentViewModel;
+
+import static pl.lodz.p.whoborrowedthat.helper.SharedPrefHelper.getUserFormSP;
 
 public class LentListFragment extends Fragment {
 
@@ -44,6 +47,8 @@ public class LentListFragment extends Fragment {
         Context context = view.getContext();
         RecyclerView recyclerView = view.findViewById(R.id.listOfBorrowedStuff);
 
+        setWelcome(view);
+
         final LentRecyclerViewAdapter lentRecyclerViewAdapter = new LentRecyclerViewAdapter(context);
         recyclerView.setAdapter(lentRecyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -59,5 +64,10 @@ public class LentListFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void setWelcome(View view) {
+        TextView title = view.findViewById(R.id.title);
+        title.setText(getUserFormSP(getActivity().getApplication()).getEmail() + " - Lent List");
     }
 }
