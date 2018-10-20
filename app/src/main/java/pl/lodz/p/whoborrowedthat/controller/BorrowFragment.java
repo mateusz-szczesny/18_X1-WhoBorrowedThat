@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,11 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import pl.lodz.p.whoborrowedthat.R;
-import pl.lodz.p.whoborrowedthat.controller.dummy.DummyContent;
-import pl.lodz.p.whoborrowedthat.controller.dummy.DummyContent.DummyItem;
 import pl.lodz.p.whoborrowedthat.model.Borrow;
-import pl.lodz.p.whoborrowedthat.model.User;
-import pl.lodz.p.whoborrowedthat.service.ApiManager;
 import pl.lodz.p.whoborrowedthat.viewmodel.BorrowViewModel;
 
 import java.util.List;
