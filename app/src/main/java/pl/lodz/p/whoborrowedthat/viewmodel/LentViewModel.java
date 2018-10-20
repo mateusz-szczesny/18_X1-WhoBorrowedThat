@@ -17,7 +17,7 @@ public class LentViewModel extends AndroidViewModel {
     public LentViewModel(Application application) {
         super(application);
         apiManager = ApiManager.getInstance();
-        allLents = apiManager.getStuff(ApiManager.Stuff.LENT, new User());
+        allLents = apiManager.getStuff(ApiManager.StuffType.LENT, new User());
     }
 
     public LiveData<List<Stuff>> getAllLents() {

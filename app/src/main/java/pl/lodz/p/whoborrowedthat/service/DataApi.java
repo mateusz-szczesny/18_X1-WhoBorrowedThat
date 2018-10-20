@@ -10,10 +10,14 @@ import retrofit2.http.Query;
 public interface DataApi {
 
     @GET("v1/stuff/borrowed")
-    Call<List<Stuff>> getBorrowedThingsByUserId(@Query("token") String token,
-                                                @Query("id") String userId);
+    Call<List<Stuff>> getBorrowedThingsByUserId(
+            @Query("token") String token,
+            @Query("id") String userId
+    );
 
     @GET("v1/stuff/lent")
-    Call<List<Stuff>> getLentThingsByUserId(@Query("token") String token,
-                                            @Query("id") String userId);
+    Call<List<Stuff>> getLentThingsByUserId(
+            @Query("token") String token,
+            @Query("id") String userId
+    );
 }

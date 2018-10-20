@@ -17,7 +17,7 @@ public class BorrowViewModel extends AndroidViewModel {
     public BorrowViewModel(Application application) {
         super(application);
         apiManager = ApiManager.getInstance();
-        allBorrows = apiManager.getStuff(ApiManager.Stuff.BORROWED, new User());
+        allBorrows = apiManager.getStuff(ApiManager.StuffType.BORROWED, new User());
     }
 
     public LiveData<List<Stuff>> getAllBorrows() {
