@@ -14,20 +14,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import pl.lodz.p.whoborrowedthat.R;
-import pl.lodz.p.whoborrowedthat.model.Borrow;
+import pl.lodz.p.whoborrowedthat.adapter.BorrowsRecyclerViewAdapter;
+import pl.lodz.p.whoborrowedthat.model.Stuff;
 import pl.lodz.p.whoborrowedthat.viewmodel.BorrowViewModel;
 
 import java.util.List;
 
-public class BorrowFragment extends Fragment {
+public class BorrowListFragment extends Fragment {
 
     private BorrowViewModel borrowViewModel;
 
-    public BorrowFragment() {
+    public BorrowListFragment() {
     }
 
-    public static BorrowFragment newInstance() {
-        return new BorrowFragment();
+    public static BorrowListFragment newInstance() {
+        return new BorrowListFragment();
     }
 
     @Override
@@ -50,10 +51,10 @@ public class BorrowFragment extends Fragment {
 
         borrowViewModel = ViewModelProviders.of(this).get(BorrowViewModel.class);
         borrowsRecyclerViewAdapter.setVM(borrowViewModel);
-        borrowViewModel.getAllBorrows().observe(this, new Observer<List<Borrow>>() {
+        borrowViewModel.getAllBorrows().observe(this, new Observer<List<Stuff>>() {
             @Override
-            public void onChanged(@Nullable List<Borrow> borrows) {
-                borrowsRecyclerViewAdapter.setBorrows(borrows);
+            public void onChanged(@Nullable List<Stuff> stuffs) {
+                borrowsRecyclerViewAdapter.setStuffs(stuffs);
             }
         });
 
