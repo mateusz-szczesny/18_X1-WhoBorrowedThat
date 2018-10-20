@@ -17,23 +17,23 @@ import pl.lodz.p.whoborrowedthat.service.ApiManager;
 
 import static pl.lodz.p.whoborrowedthat.helper.SharedPrefHelper.getUserFormSP;
 
-public class BorrowViewModel extends AndroidViewModel {
-    private final LiveData<List<Stuff>> allBorrows;
+public class LentViewModel extends AndroidViewModel {
+    private final LiveData<List<Stuff>> allLents;
     private final ApiManager apiManager;
 
-    public BorrowViewModel(Application application) {
+    public LentViewModel(Application application) {
         super(application);
-
         apiManager = ApiManager.getInstance();
 
         User user = getUserFormSP(application);
+
         if (user != null)
-            allBorrows = apiManager.getStuff(ApiManager.StuffType.BORROWED, user);
+            allLents = apiManager.getStuff(ApiManager.StuffType.LENT, user);
         else
-            allBorrows = null;
+            allLents = null;
     }
 
-    public LiveData<List<Stuff>> getAllBorrows() {
-        return allBorrows;
+    public LiveData<List<Stuff>> getAllLents() {
+        return allLents;
     }
 }

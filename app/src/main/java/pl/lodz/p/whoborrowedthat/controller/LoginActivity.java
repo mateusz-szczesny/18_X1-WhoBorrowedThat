@@ -1,6 +1,8 @@
 package pl.lodz.p.whoborrowedthat.controller;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,7 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import pl.lodz.p.whoborrowedthat.R;
+import pl.lodz.p.whoborrowedthat.helper.ConstHelper;
 import pl.lodz.p.whoborrowedthat.model.User;
 import pl.lodz.p.whoborrowedthat.service.ApiManager;
 import retrofit2.Call;
@@ -41,8 +46,9 @@ public class LoginActivity extends AppCompatActivity {
                                     String.format(responseUser.getToken()),
                                     Toast.LENGTH_LONG)
                                     .show();
-                            Intent intent = new Intent(LoginActivity.this, BorrowLentListActivity.class);
-                            LoginActivity.this.startActivity(intent);
+
+                            storeUserInSharedPrefs(responseUser);
+                            onLogInSuccess();
                         } else {
                             Toast.makeText(LoginActivity.this,
                                     String.format("Response is %s", String.valueOf(response.code()))
@@ -59,5 +65,18 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    private void storeUserInSharedPrefs(User user) {
+        SharedPreferences sharedPref = getSharedPreferences(ConstHelper.USER__SP, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean(ConstHelper.USER_LOGIN_STATUS__SP, true);
+        editor.putString(ConstHelper.USER_DATA__SP, new Gson().toJson(user));
+        editor.apply();
+    }
+
+    private void onLogInSuccess() {
+        Intent intent = new Intent(LoginActivity.this, BorrowLentListActivity.class);
+        LoginActivity.this.startActivity(intent);
     }
 }

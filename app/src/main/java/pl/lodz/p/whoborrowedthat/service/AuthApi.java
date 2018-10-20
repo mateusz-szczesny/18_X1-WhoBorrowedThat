@@ -10,11 +10,15 @@ public interface AuthApi {
 
     @POST("v1/sessions")
     @FormUrlEncoded
-    Call<User> login(@Field("email") String email,
-                      @Field("password") String password);
+    Call<User> login(
+            @Field("email") String email,
+            @Field("password") String password
+    );
 
     @POST("v1/sessions/register")
     @FormUrlEncoded
-    Call<User> register(@Field("email") String email,
-                     @Field("password") String password);
+    Call<User> register(
+            @Field("email") String email,
+            @Field("password") String password)
+    ;
 }

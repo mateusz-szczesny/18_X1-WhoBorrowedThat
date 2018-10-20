@@ -4,7 +4,7 @@ import android.arch.lifecycle.MutableLiveData;
 
 import java.util.List;
 
-import pl.lodz.p.whoborrowedthat.model.Borrow;
+import pl.lodz.p.whoborrowedthat.model.Stuff;
 import pl.lodz.p.whoborrowedthat.model.User;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,7 +17,7 @@ public class ApiManager {
     private static DataApi dataService;
     private static ApiManager apiManager;
 
-    public enum Stuff { BORROWED, LENT };
+    public enum StuffType { BORROWED, LENT };
 
     private ApiManager() {
 
@@ -43,8 +43,8 @@ public class ApiManager {
         userCall.enqueue(callback);
     }
 
-    public MutableLiveData<List<Borrow>> getStuff(Stuff stuff, User user) {
-        switch (stuff) {
+    public MutableLiveData<List<Stuff>> getStuff(StuffType stuffType, User user) {
+        switch (stuffType) {
             case BORROWED:
                 return getBorrowedStuff(user);
             case LENT:
@@ -54,33 +54,33 @@ public class ApiManager {
         }
     }
 
-    private MutableLiveData<List<Borrow>> getLentStuff(User user) {
-        final MutableLiveData<List<Borrow>> data = new MutableLiveData<>();
-        dataService.getLentThingsByUserId(user.getToken(), String.valueOf(user.getId())).enqueue(new Callback<List<Borrow>>() {
+    private MutableLiveData<List<Stuff>> getLentStuff(User user) {
+        final MutableLiveData<List<Stuff>> data = new MutableLiveData<>();
+        dataService.getLentThingsByUserId(user.getToken(), String.valueOf(user.getId())).enqueue(new Callback<List<Stuff>>() {
             @Override
-            public void onResponse(Call<List<Borrow>> call, Response<List<Borrow>> response) {
+            public void onResponse(Call<List<Stuff>> call, Response<List<Stuff>> response) {
                 data.setValue(response.body());
             }
 
             @Override
-            public void onFailure(Call<List<Borrow>> call, Throwable t) {
+            public void onFailure(Call<List<Stuff>> call, Throwable t) {
                 data.setValue(null);
             }
         });
         return data;
     }
 
-    private MutableLiveData<List<Borrow>> getBorrowedStuff(User user) {
-        final MutableLiveData<List<Borrow>> data = new MutableLiveData<>();
-        dataService.getBorrowedThingsByUserId(user.getToken(), String.valueOf(user.getId())).enqueue(new Callback<List<Borrow>>() {
+    private MutableLiveData<List<Stuff>> getBorrowedStuff(User user) {
+        final MutableLiveData<List<Stuff>> data = new MutableLiveData<>();
+        dataService.getBorrowedThingsByUserId(user.getToken(), String.valueOf(user.getId())).enqueue(new Callback<List<Stuff>>() {
             @Override
-            public void onResponse(Call<List<Borrow>> call, Response<List<Borrow>> response) {
-                data.setValue(response.body());
+            public void onResponse(Call<List<Stuff>> call, Response<List<Stuff>> response) {
+
             }
 
             @Override
-            public void onFailure(Call<List<Borrow>> call, Throwable t) {
-                data.setValue(null);
+            public void onFailure(Call<List<Stuff>> call, Throwable t) {
+
             }
         });
         return data;
