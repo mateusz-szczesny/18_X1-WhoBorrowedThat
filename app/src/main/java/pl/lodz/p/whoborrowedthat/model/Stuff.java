@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
-public class Borrow {
+public class Stuff {
 
     @SerializedName("id")
     private long id;

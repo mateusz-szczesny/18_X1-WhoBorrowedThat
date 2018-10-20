@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,24 +14,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import pl.lodz.p.whoborrowedthat.R;
-import pl.lodz.p.whoborrowedthat.controller.dummy.DummyContent;
-import pl.lodz.p.whoborrowedthat.controller.dummy.DummyContent.DummyItem;
-import pl.lodz.p.whoborrowedthat.model.Borrow;
-import pl.lodz.p.whoborrowedthat.model.User;
-import pl.lodz.p.whoborrowedthat.service.ApiManager;
+import pl.lodz.p.whoborrowedthat.adapter.BorrowsRecyclerViewAdapter;
+import pl.lodz.p.whoborrowedthat.model.Stuff;
 import pl.lodz.p.whoborrowedthat.viewmodel.BorrowViewModel;
 
 import java.util.List;
 
-public class BorrowFragment extends Fragment {
+public class BorrowListFragment extends Fragment {
 
     private BorrowViewModel borrowViewModel;
 
-    public BorrowFragment() {
+    public BorrowListFragment() {
     }
 
-    public static BorrowFragment newInstance() {
-        return new BorrowFragment();
+    public static BorrowListFragment newInstance() {
+        return new BorrowListFragment();
     }
 
     @Override
@@ -55,10 +51,10 @@ public class BorrowFragment extends Fragment {
 
         borrowViewModel = ViewModelProviders.of(this).get(BorrowViewModel.class);
         borrowsRecyclerViewAdapter.setVM(borrowViewModel);
-        borrowViewModel.getAllBorrows().observe(this, new Observer<List<Borrow>>() {
+        borrowViewModel.getAllBorrows().observe(this, new Observer<List<Stuff>>() {
             @Override
-            public void onChanged(@Nullable List<Borrow> borrows) {
-                borrowsRecyclerViewAdapter.setBorrows(borrows);
+            public void onChanged(@Nullable List<Stuff> stuffs) {
+                borrowsRecyclerViewAdapter.setStuffs(stuffs);
             }
         });
 

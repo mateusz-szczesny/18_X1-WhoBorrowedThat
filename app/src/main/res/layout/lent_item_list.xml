@@ -5,18 +5,18 @@ xmlns:tools="http://schemas.android.com/tools"
 android:name="pl.lodz.p.whoborrowedthat.controller.BorrowFragment"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context=".controller.BorrowListFragment">
+tools:context=".controller.LentListFragment">
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="BORROW LIST TITLE / TEST" />
+        android:text="LENT LIST TITLE / TEST" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/listOfBorrowedStuff"
         android:layout_width="match_parent"
-        android:layout_height="407dp"
+        android:layout_height="415dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
