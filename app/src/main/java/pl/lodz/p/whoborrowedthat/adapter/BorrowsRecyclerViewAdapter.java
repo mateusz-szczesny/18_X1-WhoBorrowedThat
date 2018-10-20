@@ -2,6 +2,8 @@ package pl.lodz.p.whoborrowedthat.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,10 +12,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import pl.lodz.p.whoborrowedthat.R;
+import pl.lodz.p.whoborrowedthat.controller.StuffDetailActivity;
 import pl.lodz.p.whoborrowedthat.model.Stuff;
 import pl.lodz.p.whoborrowedthat.viewmodel.BorrowViewModel;
 
 import java.util.List;
+
+import static pl.lodz.p.whoborrowedthat.helper.ConstHelper.STUFF_BUNDLE__KEY;
 
 public class BorrowsRecyclerViewAdapter extends RecyclerView.Adapter<BorrowsRecyclerViewAdapter.ViewHolder> {
 
@@ -44,6 +49,17 @@ public class BorrowsRecyclerViewAdapter extends RecyclerView.Adapter<BorrowsRecy
             //TODO: set specific data for one item after layout specified
             holder.id.setText(current.getName());
             holder.content.setText(current.getDesc());
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), StuffDetailActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(STUFF_BUNDLE__KEY, stuffs.get(position));
+                    intent.putExtras(bundle);
+                    v.getContext().startActivity(intent);
+                }
+            });
         } else {
             holder.content.setText("Name not found...");
         }

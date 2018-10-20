@@ -2,9 +2,10 @@ package pl.lodz.p.whoborrowedthat.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Stuff {
+public class Stuff implements Serializable {
 
     @SerializedName("id")
     private long id;
