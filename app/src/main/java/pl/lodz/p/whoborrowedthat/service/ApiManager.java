@@ -61,7 +61,6 @@ public class ApiManager {
         dataService.getLentThingsByUserEmail(user.getToken(), user.getEmail()).enqueue(new Callback<List<Stuff>>() {
             @Override
             public void onResponse(Call<List<Stuff>> call, Response<List<Stuff>> response) {
-                //TODO: ADRIAN: add this to factory to fetch data from the data tag
                 data.setValue(response.body());
             }
 
