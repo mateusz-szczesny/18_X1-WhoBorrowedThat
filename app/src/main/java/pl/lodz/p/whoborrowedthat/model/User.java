@@ -11,6 +11,8 @@ public class User {
     private String firstName;
     @SerializedName("last_name")
     private String lastName;
+    @SerializedName("username")
+    private String username;
     @SerializedName("authentication_token")
     private String token;
 
@@ -52,5 +54,13 @@ public class User {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

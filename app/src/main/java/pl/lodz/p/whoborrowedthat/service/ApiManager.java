@@ -4,6 +4,7 @@ import android.arch.lifecycle.MutableLiveData;
 
 import java.util.List;
 
+import pl.lodz.p.whoborrowedthat.coverter.CustomConverterFactory;
 import pl.lodz.p.whoborrowedthat.model.Stuff;
 import pl.lodz.p.whoborrowedthat.model.User;
 import retrofit2.Call;
@@ -23,6 +24,7 @@ public class ApiManager {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://who-borrowed-that.herokuapp.com/")
+                .addConverterFactory(new CustomConverterFactory())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -76,13 +78,12 @@ public class ApiManager {
         dataService.getBorrowedThingsByUserEmail(user.getToken(), user.getEmail()).enqueue(new Callback<List<Stuff>>() {
             @Override
             public void onResponse(Call<List<Stuff>> call, Response<List<Stuff>> response) {
-                //TODO: ADRIAN: add this to factory to fetch data from the data tag
                 data.setValue(response.body());
             }
 
             @Override
             public void onFailure(Call<List<Stuff>> call, Throwable t) {
-
+                data.setValue(null);
             }
         });
         return data;

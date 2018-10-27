@@ -14,4 +14,12 @@ public class SharedPrefHelper {
         SharedPreferences sharedPref = application.getSharedPreferences(ConstHelper.USER__SP, Context.MODE_PRIVATE);
         return new Gson().fromJson(sharedPref.getString(ConstHelper.USER_DATA__SP, ""), User.class);
     }
+
+    public static void storeUserInSharedPrefs(User user, Application application) {
+        SharedPreferences sharedPref = application.getSharedPreferences(ConstHelper.USER__SP, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean(ConstHelper.USER_LOGIN_STATUS__SP, true);
+        editor.putString(ConstHelper.USER_DATA__SP, new Gson().toJson(user));
+        editor.apply();
+    }
 }
