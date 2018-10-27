@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 
 import pl.lodz.p.whoborrowedthat.R;
 import pl.lodz.p.whoborrowedthat.helper.ConstHelper;
+import pl.lodz.p.whoborrowedthat.helper.SharedPrefHelper;
 import pl.lodz.p.whoborrowedthat.model.User;
 import pl.lodz.p.whoborrowedthat.service.ApiManager;
 import retrofit2.Call;
@@ -43,11 +44,10 @@ public class LoginActivity extends AppCompatActivity {
                         User responseUser = response.body();
                         if (response.isSuccessful() && responseUser != null) {
                             Toast.makeText(LoginActivity.this,
-                                    String.format(responseUser.getToken()),
+                                    responseUser.getToken(),
                                     Toast.LENGTH_LONG)
                                     .show();
-
-                            storeUserInSharedPrefs(responseUser);
+                            SharedPrefHelper.storeUserInSharedPrefs(responseUser, getApplication());
                             onLogInSuccess();
                         } else {
                             Toast.makeText(LoginActivity.this,
@@ -77,13 +77,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    private void storeUserInSharedPrefs(User user) {
-        SharedPreferences sharedPref = getSharedPreferences(ConstHelper.USER__SP, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putBoolean(ConstHelper.USER_LOGIN_STATUS__SP, true);
-        editor.putString(ConstHelper.USER_DATA__SP, new Gson().toJson(user));
-        editor.apply();
-    }
+
 
     private void onLogInSuccess() {
         Intent intent = new Intent(LoginActivity.this, BorrowLentListActivity.class);
