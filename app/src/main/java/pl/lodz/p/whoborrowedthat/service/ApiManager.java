@@ -56,9 +56,10 @@ public class ApiManager {
 
     private MutableLiveData<List<Stuff>> getLentStuff(User user) {
         final MutableLiveData<List<Stuff>> data = new MutableLiveData<>();
-        dataService.getLentThingsByUserId(user.getToken(), String.valueOf(user.getId())).enqueue(new Callback<List<Stuff>>() {
+        dataService.getLentThingsByUserEmail(user.getToken(), user.getEmail()).enqueue(new Callback<List<Stuff>>() {
             @Override
             public void onResponse(Call<List<Stuff>> call, Response<List<Stuff>> response) {
+                //TODO: ADRIAN: add this to factory to fetch data from the data tag
                 data.setValue(response.body());
             }
 
@@ -72,10 +73,11 @@ public class ApiManager {
 
     private MutableLiveData<List<Stuff>> getBorrowedStuff(User user) {
         final MutableLiveData<List<Stuff>> data = new MutableLiveData<>();
-        dataService.getBorrowedThingsByUserId(user.getToken(), String.valueOf(user.getId())).enqueue(new Callback<List<Stuff>>() {
+        dataService.getBorrowedThingsByUserEmail(user.getToken(), user.getEmail()).enqueue(new Callback<List<Stuff>>() {
             @Override
             public void onResponse(Call<List<Stuff>> call, Response<List<Stuff>> response) {
-
+                //TODO: ADRIAN: add this to factory to fetch data from the data tag
+                data.setValue(response.body());
             }
 
             @Override
