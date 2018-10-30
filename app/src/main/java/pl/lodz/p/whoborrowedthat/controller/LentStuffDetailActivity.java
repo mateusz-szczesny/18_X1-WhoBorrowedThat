@@ -11,7 +11,7 @@ import pl.lodz.p.whoborrowedthat.model.Stuff;
 
 import static pl.lodz.p.whoborrowedthat.helper.ConstHelper.STUFF_BUNDLE__KEY;
 
-public class LentStuffDetailActivity extends AppCompatActivity {
+public class LentStuffDetailActivity extends AppBaseActivity {
     private Stuff stuff;
     private TextView itemName;
     private TextView borrowDate;

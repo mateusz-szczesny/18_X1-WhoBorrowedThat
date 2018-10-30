@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import pl.lodz.p.whoborrowedthat.R;
 
-public class StuffAddActivity extends AppCompatActivity {
+public class StuffAddActivity extends AppBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
