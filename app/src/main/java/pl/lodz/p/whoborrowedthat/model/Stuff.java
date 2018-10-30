@@ -10,11 +10,11 @@ public class Stuff implements Serializable {
     @SerializedName("id")
     private long id;
 
-    @SerializedName("ownerid")
-    private long ownerId;
+    @SerializedName("borrower")
+    private User borrower;
 
-    @SerializedName("borrower_id")
-    private long borrowerId;
+    @SerializedName("owner")
+    private User owner;
 
     @SerializedName("name")
     private String name;
@@ -42,20 +42,20 @@ public class Stuff implements Serializable {
         this.id = id;
     }
 
-    public long getOwnerId() {
-        return ownerId;
+    public User getBorrower() {
+        return borrower;
     }
 
-    public void setOwnerId(long ownerId) {
-        this.ownerId = ownerId;
+    public void setBorrower(User borrower) {
+        this.borrower = borrower;
     }
 
-    public long getBorrowerId() {
-        return borrowerId;
+    public User getOwner() {
+        return owner;
     }
 
-    public void setBorrowerId(long borrowerId) {
-        this.borrowerId = borrowerId;
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     public String getName() {

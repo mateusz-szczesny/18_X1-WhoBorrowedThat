@@ -2,7 +2,9 @@ package pl.lodz.p.whoborrowedthat.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable{
     @SerializedName("id")
     private long id;
     @SerializedName("email")
@@ -15,6 +17,15 @@ public class User {
     private String username;
     @SerializedName("authentication_token")
     private String token;
+
+    public User(long id, String email, String firstName, String lastName, String username, String token) {
+        this.id = id;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.token = token;
+    }
 
     public long getId() {
         return id;
