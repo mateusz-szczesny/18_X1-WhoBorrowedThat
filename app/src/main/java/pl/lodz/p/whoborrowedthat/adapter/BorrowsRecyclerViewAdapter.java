@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import pl.lodz.p.whoborrowedthat.R;
-import pl.lodz.p.whoborrowedthat.controller.StuffDetailActivity;
+import pl.lodz.p.whoborrowedthat.controller.BorrowedStuffDetailActivity;
 import pl.lodz.p.whoborrowedthat.model.Stuff;
 import pl.lodz.p.whoborrowedthat.viewmodel.BorrowViewModel;
 
@@ -53,7 +53,7 @@ public class BorrowsRecyclerViewAdapter extends RecyclerView.Adapter<BorrowsRecy
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), StuffDetailActivity.class);
+                    Intent intent = new Intent(v.getContext(), BorrowedStuffDetailActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(STUFF_BUNDLE__KEY, stuffs.get(position));
                     intent.putExtras(bundle);

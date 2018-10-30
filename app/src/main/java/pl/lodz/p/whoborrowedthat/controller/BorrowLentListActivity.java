@@ -11,7 +11,7 @@ import android.os.Bundle;
 
 import pl.lodz.p.whoborrowedthat.R;
 
-public class BorrowLentListActivity extends AppCompatActivity {
+public class BorrowLentListActivity extends AppBaseActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
 

@@ -36,5 +36,4 @@ dependencies {
     compile group: 'com.squareup.retrofit2', name: 'converter-moshi', version: '2.4.0'
 
 
-
 }
