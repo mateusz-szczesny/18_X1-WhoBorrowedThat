@@ -3,8 +3,10 @@ package pl.lodz.p.whoborrowedthat.controller;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,6 +28,7 @@ import static pl.lodz.p.whoborrowedthat.helper.SharedPrefHelper.getUserFormSP;
 public class LentListFragment extends Fragment {
 
     private LentViewModel lentViewModel;
+    private FloatingActionButton addButton;
 
     public LentListFragment() {
     }
@@ -60,6 +63,15 @@ public class LentListFragment extends Fragment {
             @Override
             public void onChanged(@Nullable List<Stuff> stuffs) {
                 lentRecyclerViewAdapter.setLents(stuffs);
+            }
+        });
+
+        addButton = view.findViewById(R.id.addButton);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), StuffAddActivity.class);
+                view.getContext().startActivity(intent);
             }
         });
 
