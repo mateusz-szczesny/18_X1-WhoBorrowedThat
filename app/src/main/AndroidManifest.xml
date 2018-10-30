@@ -38,7 +38,8 @@
         <activity android:name=".controller.BorrowedStuffDetailActivity" />
         <activity android:name=".controller.LentStuffDetailActivity" />
         <activity android:name=".controller.StuffAddActivity" />
-        <activity android:name=".controller.AppBaseActivity"></activity>
+        <activity android:name=".controller.AppBaseActivity" />
+        <activity android:name=".controller.SettingsActivity"></activity>
     </application>
 
 </manifest>

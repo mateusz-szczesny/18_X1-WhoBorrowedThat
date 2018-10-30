@@ -1,5 +1,6 @@
 package pl.lodz.p.whoborrowedthat.controller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -68,10 +69,11 @@ public abstract class AppBaseActivity extends AppCompatActivity implements MenuI
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
-            //TODO handle on click menu 
-            case R.id.nav_1:
-                // handle it
-                System.out.println("nav1=====================");
+            //TODO handle on click menu
+            case R.id.settings:
+                Intent intent = new Intent(getBaseContext(), SettingsActivity.class);
+                getBaseContext().startActivity(intent);
+                //System.out.println("nav1=====================");
                 break;
             case R.id.nav_2:
                 // do whatever
