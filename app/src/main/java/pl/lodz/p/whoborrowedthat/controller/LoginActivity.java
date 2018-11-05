@@ -10,8 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
 import pl.lodz.p.whoborrowedthat.R;
 import pl.lodz.p.whoborrowedthat.helper.ConstHelper;
 import pl.lodz.p.whoborrowedthat.helper.SharedPrefHelper;
@@ -29,9 +27,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setElevation(0);
-        final EditText emailText = findViewById(R.id.editTextEmail);
-        final EditText passowrdText = findViewById(R.id.editTextPassword);
-        Button loginButton = findViewById(R.id.buttonSignIn);
+        final EditText emailText = findViewById(R.id.editTextPassword);
+        final EditText passowrdText = findViewById(R.id.editTextPasswordConfirmation);
+        Button loginButton = findViewById(R.id.buttonSignUp);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
