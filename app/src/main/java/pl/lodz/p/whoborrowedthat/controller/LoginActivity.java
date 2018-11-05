@@ -27,9 +27,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setElevation(0);
-        final EditText emailText = findViewById(R.id.editTextPassword);
-        final EditText passowrdText = findViewById(R.id.editTextPasswordConfirmation);
-        Button loginButton = findViewById(R.id.buttonSignUp);
+        final EditText emailText = findViewById(R.id.editTextEmail);
+        final EditText passowrdText = findViewById(R.id.editTextPassword);
+        Button loginButton = findViewById(R.id.buttonSignIn);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

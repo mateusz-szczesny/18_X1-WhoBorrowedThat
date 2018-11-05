@@ -27,7 +27,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/editTextPassword"
+            android:id="@+id/editTextEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_light"
@@ -38,7 +38,7 @@
             android:textSize="22sp" />
 
         <EditText
-            android:id="@+id/editTextPasswordConfirmation"
+            android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_light"
@@ -69,7 +69,7 @@
         app:layout_constraintVertical_bias="0.165" />
 
     <Button
-        android:id="@+id/buttonSignUp"
+        android:id="@+id/buttonSignIn"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
