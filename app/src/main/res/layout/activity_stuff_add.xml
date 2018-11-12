@@ -16,7 +16,7 @@
         android:layout_marginEnd="76dp"
         android:background="@color/colorAccent"
         android:fontFamily="@font/roboto_light"
-
+        android:onClick="showDatePickerDialogForRentalDate"
         android:text="pick a date"
         android:textAllCaps="false"
         android:textColor="@android:color/black"
@@ -56,6 +56,7 @@
 
     <Button
         android:id="@+id/returnDatePickerButton"
+        android:onClick="showDatePickerDialogForReturnDate"
         android:layout_width="97dp"
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
