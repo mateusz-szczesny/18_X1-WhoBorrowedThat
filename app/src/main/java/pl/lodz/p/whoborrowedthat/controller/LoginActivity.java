@@ -10,8 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
 import pl.lodz.p.whoborrowedthat.R;
 import pl.lodz.p.whoborrowedthat.helper.ConstHelper;
 import pl.lodz.p.whoborrowedthat.helper.SharedPrefHelper;

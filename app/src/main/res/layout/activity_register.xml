@@ -25,23 +25,11 @@
         app:layout_constraintVertical_bias="0.35000002">
 
         <EditText
-            android:id="@+id/editTextName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_light"
-            android:hint="name"
-            android:inputType="text"
-            android:textColor="@android:color/white"
-            android:textColorHighlight="@android:color/white"
-            android:textColorHint="@android:color/white"
-            android:textSize="24sp" />
-
-        <EditText
             android:id="@+id/editTextEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_light"
-            android:hint="email address"
+            android:hint="email addres"
             android:inputType="textEmailAddress"
             android:textColor="@android:color/white"
             android:textColorHighlight="@android:color/white"
@@ -54,6 +42,18 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_light"
             android:hint="password"
+            android:inputType="textPassword"
+            android:textColor="@android:color/white"
+            android:textColorHighlight="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/editTextPasswordConfirmation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_light"
+            android:hint="password confirmation"
             android:inputType="textPassword"
             android:textColor="@android:color/white"
             android:textColorHighlight="@android:color/white"
@@ -82,7 +82,7 @@
         app:layout_constraintVertical_bias="0.137" />
 
     <Button
-        android:id="@+id/buttonSignIn"
+        android:id="@+id/buttonSignUp"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -119,6 +119,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSignIn" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonSignUp" />
 
 </android.support.constraint.ConstraintLayout>

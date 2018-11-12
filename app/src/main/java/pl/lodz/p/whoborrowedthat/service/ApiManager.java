@@ -4,6 +4,8 @@ import android.arch.lifecycle.MutableLiveData;
 
 import java.util.List;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import pl.lodz.p.whoborrowedthat.coverter.CustomConverterFactory;
 import pl.lodz.p.whoborrowedthat.model.Stuff;
 import pl.lodz.p.whoborrowedthat.model.User;
@@ -22,10 +24,17 @@ public class ApiManager {
 
     private ApiManager() {
 
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(interceptor)
+                .build();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://who-borrowed-that.herokuapp.com/")
                 .addConverterFactory(new CustomConverterFactory())
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
                 .build();
 
         authService = retrofit.create(AuthApi.class);
@@ -86,5 +95,10 @@ public class ApiManager {
             }
         });
         return data;
+    }
+
+    public void registerUser(String email, String password, String passwordConfirmation, Callback<User> callback) {
+        Call<User> userCall = authService.register(email, password, passwordConfirmation);
+        userCall.enqueue(callback);
     }
 }
