@@ -48,7 +48,7 @@ public class LentRecyclerViewAdapter extends RecyclerView.Adapter<LentRecyclerVi
         if (stuffs != null) {
             final Stuff current = stuffs.get(position);
             //TODO: set specific data for one item after layout specified
-            holder.id.setText(current.getName());
+
             holder.content.setText(current.getDesc());
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -79,12 +79,10 @@ public class LentRecyclerViewAdapter extends RecyclerView.Adapter<LentRecyclerVi
 
     //TODO: set specific data for one item after layout specified
     class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView id;
         private final TextView content;
 
         private ViewHolder(View itemView) {
             super(itemView);
-            id = itemView.findViewById(R.id.item_number);
             content = itemView.findViewById(R.id.content);
         }
     }

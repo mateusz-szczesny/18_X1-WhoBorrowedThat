@@ -67,7 +67,7 @@ public class BorrowListFragment extends Fragment {
     }
 
     private void setWelcome(View view) {
-        TextView title = view.findViewById(R.id.title);
-        title.setText(getUserFormSP(getActivity().getApplication()).getEmail() + " - Borrowed List");
+//        TextView title = view.findViewById(R.id.title);
+//        title.setText(getUserFormSP(getActivity().getApplication()).getEmail() + " - Borrowed List");
     }
 }
