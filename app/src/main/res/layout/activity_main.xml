@@ -72,15 +72,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/roboto"
-        android:text="Sign up"
+        android:text="Create an account"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textColorLink="@color/colorAccent"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginGoogleButton" />
 
