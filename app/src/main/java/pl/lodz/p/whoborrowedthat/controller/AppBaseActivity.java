@@ -74,7 +74,7 @@ public abstract class AppBaseActivity extends AppCompatActivity implements MenuI
                 intent = new Intent(getBaseContext(), SettingsActivity.class);
                 getBaseContext().startActivity(intent);
                 break;
-            case R.id.nav_2:
+            case R.id.friends:
                 intent = new Intent(getBaseContext(), AddFriendActivity.class);
                 getBaseContext().startActivity(intent);
                 break;
