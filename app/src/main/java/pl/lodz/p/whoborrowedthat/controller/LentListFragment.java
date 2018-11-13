@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,6 +30,8 @@ public class LentListFragment extends Fragment {
 
     private LentViewModel lentViewModel;
     private FloatingActionButton addButton;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+
 
     public LentListFragment() {
     }
@@ -72,6 +75,22 @@ public class LentListFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), StuffAddActivity.class);
                 view.getContext().startActivity(intent);
+            }
+        });
+
+        mSwipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayoutLent);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                lentViewModel.refreshData(getActivity().getApplication());
+               // lentRecyclerViewAdapter.setLents(lentViewModel.getAllLents().getValue());
+                lentViewModel.getAllLents().observe(getViewLifecycleOwner(), new Observer<List<Stuff>>() {
+                    @Override
+                    public void onChanged(@Nullable List<Stuff> stuffs) {
+                        lentRecyclerViewAdapter.setLents(stuffs);
+                    }
+                });
+                mSwipeRefreshLayout.setRefreshing(false);
             }
         });
 
