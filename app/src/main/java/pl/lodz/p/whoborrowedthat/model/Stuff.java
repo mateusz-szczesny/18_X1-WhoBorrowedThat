@@ -105,4 +105,12 @@ public class Stuff implements Serializable {
     public void setReturnDate(Date returnDate) {
         this.returnDate = returnDate;
     }
+
+    public Stuff() {
+        borrower = new User();
+        owner = new User();
+        rentalDate = new Date();
+        estimatedReturnDate = new Date();
+        returnDate = new Date();
+    }
 }

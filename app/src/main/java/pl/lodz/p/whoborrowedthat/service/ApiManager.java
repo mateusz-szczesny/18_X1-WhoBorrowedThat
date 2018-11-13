@@ -2,6 +2,7 @@ package pl.lodz.p.whoborrowedthat.service;
 
 import android.arch.lifecycle.MutableLiveData;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
@@ -99,6 +100,14 @@ public class ApiManager {
 
     public void registerUser(String email, String password, String passwordConfirmation, Callback<User> callback) {
         Call<User> userCall = authService.register(email, password, passwordConfirmation);
+        userCall.enqueue(callback);
+    }
+
+    public void addBorrows(User user, Stuff stuff, Callback<Object> callback) {
+        SimpleDateFormat a  = new SimpleDateFormat("dd-MM-YYYY");
+        Call<Object> userCall = dataService.addBorrows(user.getToken(), user.getEmail(),
+                String.valueOf(user.getId()), String.valueOf(stuff.getBorrower().getId()),
+                stuff.getName(),a.format(stuff.getRentalDate()), a.format(stuff.getReturnDate()));
         userCall.enqueue(callback);
     }
 }
