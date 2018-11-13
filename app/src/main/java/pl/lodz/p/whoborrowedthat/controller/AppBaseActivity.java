@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import pl.lodz.p.whoborrowedthat.R;
+import pl.lodz.p.whoborrowedthat.helper.SharedPrefHelper;
 
 public abstract class AppBaseActivity extends AppCompatActivity implements MenuItem.OnMenuItemClickListener {
     private FrameLayout view_stub; //This is the framelayout to keep your content view
@@ -77,6 +78,13 @@ public abstract class AppBaseActivity extends AppCompatActivity implements MenuI
             case R.id.friends:
                 intent = new Intent(getBaseContext(), AddFriendActivity.class);
                 getBaseContext().startActivity(intent);
+                break;
+            case R.id.logout:
+                SharedPrefHelper.removeUserFromSP(getApplication());
+                intent = new Intent(getBaseContext(), LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                getBaseContext().startActivity(intent);
+                this.finish();
                 break;
         }
         return false;

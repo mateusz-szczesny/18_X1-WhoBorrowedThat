@@ -22,4 +22,9 @@ public class SharedPrefHelper {
         editor.putString(ConstHelper.USER_DATA__SP, new Gson().toJson(user));
         editor.apply();
     }
+
+    public static void removeUserFromSP(Application application) {
+        SharedPreferences sharedPref = application.getSharedPreferences(ConstHelper.USER__SP, Context.MODE_PRIVATE);
+        sharedPref.edit().clear().commit();
+    }
 }

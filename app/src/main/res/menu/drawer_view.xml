@@ -11,7 +11,7 @@
             android:id="@+id/nav_3"
             android:title="CALENDAR" />
         <item
-            android:id="@+id/nav_4"
+            android:id="@+id/logout"
             android:title="LOGOUT" />
     </group>
 </menu>
