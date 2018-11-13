@@ -39,7 +39,8 @@
         <activity android:name=".controller.LentStuffDetailActivity" />
         <activity android:name=".controller.StuffAddActivity" />
         <activity android:name=".controller.AppBaseActivity" />
-        <activity android:name=".controller.SettingsActivity"></activity>
+        <activity android:name=".controller.SettingsActivity" />
+        <activity android:name=".controller.AddFriendActivity"></activity>
     </application>
 
 </manifest>

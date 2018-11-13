@@ -35,6 +35,13 @@ public interface DataApi {
             @Path("id") long id
     );
 
+    @POST("v1/user_relations")
+    Call<UserRelation> setUserRelation (
+            @Header("X-User-Token") String token,
+            @Header("X-User-Email") String email,
+            @Header("email") String friendEmail
+    );
+
     @POST("v1/borrows")
     @FormUrlEncoded
     Call<Object> addBorrows(
