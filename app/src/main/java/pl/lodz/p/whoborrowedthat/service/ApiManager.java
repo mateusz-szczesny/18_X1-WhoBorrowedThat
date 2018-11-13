@@ -27,6 +27,8 @@ public class ApiManager {
 
     private ApiManager() {
 
+        final String END_POINT = "https://who-borrowed-that.herokuapp.com/";
+
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder()
@@ -34,7 +36,7 @@ public class ApiManager {
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://who-borrowed-that.herokuapp.com/")
+                .baseUrl(END_POINT)
                 .addConverterFactory(new CustomConverterFactory())
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
@@ -57,51 +59,21 @@ public class ApiManager {
         userCall.enqueue(callback);
     }
 
-    public List<Stuff> getStuff(StuffType stuffType, User user, Callback<List<Stuff>> callback) {
+    public void getStuff(StuffType stuffType, User user, Callback<List<Stuff>> callback) {
         switch (stuffType) {
             case BORROWED:
-                return getBorrowedStuff(user);
+                getBorrowedStuff(user, callback);
             case LENT:
-                return getLentStuff(user, callback);
-            default:
-                return null;
+                getLentStuff(user, callback);
         }
     }
 
-    private List<Stuff> getLentStuff(User user, Callback<List<Stuff>> callback) {
-        final List<Stuff> data = new ArrayList<>();
-        Call<List<Stuff>> stuff = dataService.getLentThingsByUserEmail(user.getToken(), user.getEmail());
-        stuff.enqueue(callback);
-        /*dataService.getLentThingsByUserEmail(user.getToken(), user.getEmail()).enqueue(new Callback<List<Stuff>>() {
-            @Override
-            public void onResponse(Call<List<Stuff>> call, Response<List<Stuff>> response) {
-                data.addAll(response.body());
-            }
-
-            @Override
-            public void onFailure(Call<List<Stuff>> call, Throwable t) {
-                //data.setValue(null);
-                t.printStackTrace();
-            }
-        });*/
-        return data;
+    private void getLentStuff(User user, Callback<List<Stuff>> callback) {
+        dataService.getLentThingsByUserEmail(user.getToken(), user.getEmail()).enqueue(callback);
     }
 
-    private List<Stuff> getBorrowedStuff(User user) {
-        final List<Stuff> data = new ArrayList<>();
-        dataService.getBorrowedThingsByUserEmail(user.getToken(), user.getEmail()).enqueue(new Callback<List<Stuff>>() {
-            @Override
-            public void onResponse(Call<List<Stuff>> call, Response<List<Stuff>> response) {
-                data.addAll(response.body());
-            }
-
-            @Override
-            public void onFailure(Call<List<Stuff>> call, Throwable t) {
-               // data.setValue(null);
-                t.printStackTrace();
-            }
-        });
-        return data;
+    private void getBorrowedStuff(User user, Callback<List<Stuff>> callback) {
+        dataService.getBorrowedThingsByUserEmail(user.getToken(), user.getEmail()).enqueue(callback);
     }
 
     public void registerUser(String email, String password, String passwordConfirmation, Callback<User> callback) {
@@ -117,20 +89,7 @@ public class ApiManager {
         userCall.enqueue(callback);
     }
 
-    public MutableLiveData<List<UserRelation>> getUserRelations(User user) {
-        final MutableLiveData<List<UserRelation>> data = new MutableLiveData<>();
-        dataService.getUserRelations(user.getToken(), user.getEmail(), user.getId()).enqueue(new Callback<List<UserRelation>>() {
-            @Override
-            public void onResponse(Call<List<UserRelation>> call, Response<List<UserRelation>> response) {
-                data.setValue(response.body());
-            }
-
-            @Override
-            public void onFailure(Call<List<UserRelation>> call, Throwable t) {
-                data.setValue(null);
-            }
-        });
-
-        return data;
+    public void getUserRelations(User user, Callback<List<UserRelation>> callback) {
+        dataService.getUserRelations(user.getToken(), user.getEmail(), user.getId()).enqueue(callback);
     }
 }
