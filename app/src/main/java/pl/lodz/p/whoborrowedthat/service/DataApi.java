@@ -26,18 +26,18 @@ public interface DataApi {
             @Header("X-User-Email") String email
     );
 
-    @GET("v1/user_relations/{id}")
+    @GET("v1/user_relations")
     Call<List<UserRelation>> getUserRelations(
             @Header("X-User-Token") String token,
-            @Header("X-User-Email") String email,
-            @Path("id") long id
+            @Header("X-User-Email") String email
     );
 
     @POST("v1/user_relations")
+    @FormUrlEncoded
     Call<UserRelation> setUserRelation (
             @Header("X-User-Token") String token,
             @Header("X-User-Email") String email,
-            @Header("email") String friendEmail
+            @Field("email") String friendEmail
     );
 
     @POST("v1/borrows")

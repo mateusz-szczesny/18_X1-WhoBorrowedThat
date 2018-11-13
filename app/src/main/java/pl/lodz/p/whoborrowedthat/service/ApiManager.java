@@ -86,7 +86,7 @@ public class ApiManager {
     }
 
     public void getUserRelations(User user, Callback<List<UserRelation>> callback) {
-        dataService.getUserRelations(user.getToken(), user.getEmail(), user.getId()).enqueue(callback);
+        dataService.getUserRelations(user.getToken(), user.getEmail()).enqueue(callback);
     }
 
     public void setUserRelation(User user, String emailToAdd, Callback<UserRelation> callback) {
