@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +27,7 @@ import static pl.lodz.p.whoborrowedthat.helper.SharedPrefHelper.getUserFormSP;
 public class BorrowListFragment extends Fragment {
 
     private BorrowViewModel borrowViewModel;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     public BorrowListFragment() {
     }
@@ -47,15 +49,12 @@ public class BorrowListFragment extends Fragment {
         Context context = view.getContext();
         RecyclerView recyclerView = view.findViewById(R.id.listOfBorrowedStuff);
 
-        setWelcome(view);
-
         final BorrowsRecyclerViewAdapter borrowsRecyclerViewAdapter = new BorrowsRecyclerViewAdapter(context);
         recyclerView.setAdapter(borrowsRecyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         borrowViewModel = ViewModelProviders.of(this).get(BorrowViewModel.class);
-        borrowsRecyclerViewAdapter.setVM(borrowViewModel);
         borrowViewModel.getAllBorrows().observe(this, new Observer<List<Stuff>>() {
             @Override
             public void onChanged(@Nullable List<Stuff> stuffs) {
@@ -63,11 +62,15 @@ public class BorrowListFragment extends Fragment {
             }
         });
 
-        return view;
-    }
+        mSwipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayoutBorrow);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                borrowViewModel.refreshData(getActivity().getApplication());
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
-    private void setWelcome(View view) {
-//        TextView title = view.findViewById(R.id.title);
-//        title.setText(getUserFormSP(getActivity().getApplication()).getEmail() + " - Borrowed List");
+        return view;
     }
 }

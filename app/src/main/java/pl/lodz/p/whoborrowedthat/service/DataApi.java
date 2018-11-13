@@ -1,6 +1,5 @@
 package pl.lodz.p.whoborrowedthat.service;
 
-import java.util.Date;
 import java.util.List;
 
 import pl.lodz.p.whoborrowedthat.model.Stuff;
@@ -12,7 +11,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 public interface DataApi {
 
@@ -28,11 +26,18 @@ public interface DataApi {
             @Header("X-User-Email") String email
     );
 
-    @GET("v1/user_relations/{id}")
+    @GET("v1/user_relations")
     Call<List<UserRelation>> getUserRelations(
             @Header("X-User-Token") String token,
+            @Header("X-User-Email") String email
+    );
+
+    @POST("v1/user_relations")
+    @FormUrlEncoded
+    Call<UserRelation> setUserRelation (
+            @Header("X-User-Token") String token,
             @Header("X-User-Email") String email,
-            @Path("id") long id
+            @Field("email") String friendEmail
     );
 
     @POST("v1/borrows")

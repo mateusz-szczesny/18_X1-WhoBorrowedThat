@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,6 +30,8 @@ public class LentListFragment extends Fragment {
 
     private LentViewModel lentViewModel;
     private FloatingActionButton addButton;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+
 
     public LentListFragment() {
     }
@@ -50,15 +53,12 @@ public class LentListFragment extends Fragment {
         Context context = view.getContext();
         RecyclerView recyclerView = view.findViewById(R.id.listOfBorrowedStuff);
 
-        setWelcome(view);
-
         final LentRecyclerViewAdapter lentRecyclerViewAdapter = new LentRecyclerViewAdapter(context);
         recyclerView.setAdapter(lentRecyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         lentViewModel = ViewModelProviders.of(this).get(LentViewModel.class);
-        lentRecyclerViewAdapter.setVM(lentViewModel);
         lentViewModel.getAllLents().observe(this, new Observer<List<Stuff>>() {
             @Override
             public void onChanged(@Nullable List<Stuff> stuffs) {
@@ -75,12 +75,15 @@ public class LentListFragment extends Fragment {
             }
         });
 
+        mSwipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayoutLent);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                lentViewModel.refreshData(getActivity().getApplication());
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
         return view;
     }
 
-    private void setWelcome(View view) {
-//        TextView title = view.findViewById(R.id.title);
-        String email = getUserFormSP(getActivity().getApplication()).getEmail();
-//        title.setText(email + " - Lent List");
-    }
 }

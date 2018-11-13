@@ -14,20 +14,13 @@ import android.widget.TextView;
 import java.util.List;
 
 import pl.lodz.p.whoborrowedthat.R;
-import pl.lodz.p.whoborrowedthat.controller.BorrowedStuffDetailActivity;
 import pl.lodz.p.whoborrowedthat.controller.LentStuffDetailActivity;
 import pl.lodz.p.whoborrowedthat.model.Stuff;
-import pl.lodz.p.whoborrowedthat.viewmodel.LentViewModel;
 
 import static pl.lodz.p.whoborrowedthat.helper.ConstHelper.STUFF_BUNDLE__KEY;
 
 public class LentRecyclerViewAdapter extends RecyclerView.Adapter<LentRecyclerViewAdapter.ViewHolder> {
 
-    public void setVM(LentViewModel lvm) {
-        this.lvm = lvm;
-    }
-
-    private LentViewModel lvm;
     private final LayoutInflater inflater;
     private List<Stuff> stuffs;
 
