@@ -3,14 +3,9 @@ package pl.lodz.p.whoborrowedthat.viewmodel;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
-import android.content.Context;
-import android.content.SharedPreferences;
-
-import com.google.gson.Gson;
 
 import java.util.List;
 
-import pl.lodz.p.whoborrowedthat.helper.ConstHelper;
 import pl.lodz.p.whoborrowedthat.model.Stuff;
 import pl.lodz.p.whoborrowedthat.model.User;
 import pl.lodz.p.whoborrowedthat.service.ApiManager;
@@ -36,4 +31,6 @@ public class BorrowViewModel extends AndroidViewModel {
     public LiveData<List<Stuff>> getAllBorrows() {
         return allBorrows;
     }
+
+
 }
