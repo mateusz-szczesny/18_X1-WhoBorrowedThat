@@ -1,6 +1,5 @@
 package pl.lodz.p.whoborrowedthat.service;
 
-import java.util.Date;
 import java.util.List;
 
 import pl.lodz.p.whoborrowedthat.model.Stuff;
@@ -12,7 +11,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 public interface DataApi {
 

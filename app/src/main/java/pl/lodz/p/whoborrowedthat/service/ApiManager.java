@@ -1,9 +1,6 @@
 package pl.lodz.p.whoborrowedthat.service;
 
-import android.arch.lifecycle.MutableLiveData;
-
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
@@ -14,7 +11,6 @@ import pl.lodz.p.whoborrowedthat.model.User;
 import pl.lodz.p.whoborrowedthat.model.UserRelation;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -91,5 +87,9 @@ public class ApiManager {
 
     public void getUserRelations(User user, Callback<List<UserRelation>> callback) {
         dataService.getUserRelations(user.getToken(), user.getEmail(), user.getId()).enqueue(callback);
+    }
+
+    public void setUserRelation(User user, String emailToAdd, Callback<UserRelation> callback) {
+        dataService.setUserRelation(user.getToken(), user.getEmail(), emailToAdd).enqueue(callback);
     }
 }
