@@ -3,6 +3,7 @@ package pl.lodz.p.whoborrowedthat.service;
 import android.arch.lifecycle.MutableLiveData;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
@@ -56,44 +57,48 @@ public class ApiManager {
         userCall.enqueue(callback);
     }
 
-    public MutableLiveData<List<Stuff>> getStuff(StuffType stuffType, User user) {
+    public List<Stuff> getStuff(StuffType stuffType, User user, Callback<List<Stuff>> callback) {
         switch (stuffType) {
             case BORROWED:
                 return getBorrowedStuff(user);
             case LENT:
-                return getLentStuff(user);
+                return getLentStuff(user, callback);
             default:
                 return null;
         }
     }
 
-    private MutableLiveData<List<Stuff>> getLentStuff(User user) {
-        final MutableLiveData<List<Stuff>> data = new MutableLiveData<>();
-        dataService.getLentThingsByUserEmail(user.getToken(), user.getEmail()).enqueue(new Callback<List<Stuff>>() {
+    private List<Stuff> getLentStuff(User user, Callback<List<Stuff>> callback) {
+        final List<Stuff> data = new ArrayList<>();
+        Call<List<Stuff>> stuff = dataService.getLentThingsByUserEmail(user.getToken(), user.getEmail());
+        stuff.enqueue(callback);
+        /*dataService.getLentThingsByUserEmail(user.getToken(), user.getEmail()).enqueue(new Callback<List<Stuff>>() {
             @Override
             public void onResponse(Call<List<Stuff>> call, Response<List<Stuff>> response) {
-                data.setValue(response.body());
+                data.addAll(response.body());
             }
 
             @Override
             public void onFailure(Call<List<Stuff>> call, Throwable t) {
-                data.setValue(null);
+                //data.setValue(null);
+                t.printStackTrace();
             }
-        });
+        });*/
         return data;
     }
 
-    private MutableLiveData<List<Stuff>> getBorrowedStuff(User user) {
-        final MutableLiveData<List<Stuff>> data = new MutableLiveData<>();
+    private List<Stuff> getBorrowedStuff(User user) {
+        final List<Stuff> data = new ArrayList<>();
         dataService.getBorrowedThingsByUserEmail(user.getToken(), user.getEmail()).enqueue(new Callback<List<Stuff>>() {
             @Override
             public void onResponse(Call<List<Stuff>> call, Response<List<Stuff>> response) {
-                data.setValue(response.body());
+                data.addAll(response.body());
             }
 
             @Override
             public void onFailure(Call<List<Stuff>> call, Throwable t) {
-                data.setValue(null);
+               // data.setValue(null);
+                t.printStackTrace();
             }
         });
         return data;
