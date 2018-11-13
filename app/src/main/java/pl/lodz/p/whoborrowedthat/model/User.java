@@ -18,6 +18,9 @@ public class User implements Serializable{
     @SerializedName("authentication_token")
     private String token;
 
+    public User() {
+    }
+
     public User(long id, String email, String firstName, String lastName, String username, String token) {
         this.id = id;
         this.email = email;

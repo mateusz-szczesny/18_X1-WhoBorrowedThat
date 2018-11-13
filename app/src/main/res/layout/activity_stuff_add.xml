@@ -40,6 +40,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
+
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
@@ -64,7 +65,6 @@
         android:layout_marginEnd="8dp"
         android:background="@color/colorAccent"
         android:fontFamily="@font/roboto_light"
-
         android:text="pick a date"
         android:textAllCaps="false"
         android:textColor="@android:color/black"
@@ -86,6 +86,7 @@
         app:layout_constraintHorizontal_bias="0.479"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/returnDatePickerButton" />
+
 
     <TextView
         android:id="@+id/textView7"
@@ -143,7 +144,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <Button
-        android:id="@+id/addButon"
+        android:id="@+id/addButton"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
