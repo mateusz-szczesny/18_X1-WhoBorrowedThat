@@ -49,15 +49,12 @@ public class BorrowListFragment extends Fragment {
         Context context = view.getContext();
         RecyclerView recyclerView = view.findViewById(R.id.listOfBorrowedStuff);
 
-        setWelcome(view);
-
         final BorrowsRecyclerViewAdapter borrowsRecyclerViewAdapter = new BorrowsRecyclerViewAdapter(context);
         recyclerView.setAdapter(borrowsRecyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         borrowViewModel = ViewModelProviders.of(this).get(BorrowViewModel.class);
-        borrowsRecyclerViewAdapter.setVM(borrowViewModel);
         borrowViewModel.getAllBorrows().observe(this, new Observer<List<Stuff>>() {
             @Override
             public void onChanged(@Nullable List<Stuff> stuffs) {
@@ -70,20 +67,10 @@ public class BorrowListFragment extends Fragment {
             @Override
             public void onRefresh() {
                 borrowViewModel.refreshData(getActivity().getApplication());
-                //borrowsRecyclerViewAdapter.setStuffs(borrowViewModel.getAllBorrows().getValue());
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });
 
         return view;
-    }
-
-    private void setWelcome(View view) {
-//        TextView title = view.findViewById(R.id.title);
-//        title.setText(getUserFormSP(getActivity().getApplication()).getEmail() + " - Borrowed List");
-    }
-
-    private void refreshData(){
-
     }
 }

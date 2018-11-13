@@ -53,15 +53,12 @@ public class LentListFragment extends Fragment {
         Context context = view.getContext();
         RecyclerView recyclerView = view.findViewById(R.id.listOfBorrowedStuff);
 
-        setWelcome(view);
-
         final LentRecyclerViewAdapter lentRecyclerViewAdapter = new LentRecyclerViewAdapter(context);
         recyclerView.setAdapter(lentRecyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         lentViewModel = ViewModelProviders.of(this).get(LentViewModel.class);
-        lentRecyclerViewAdapter.setVM(lentViewModel);
         lentViewModel.getAllLents().observe(this, new Observer<List<Stuff>>() {
             @Override
             public void onChanged(@Nullable List<Stuff> stuffs) {
@@ -83,23 +80,10 @@ public class LentListFragment extends Fragment {
             @Override
             public void onRefresh() {
                 lentViewModel.refreshData(getActivity().getApplication());
-               // lentRecyclerViewAdapter.setLents(lentViewModel.getAllLents().getValue());
-                lentViewModel.getAllLents().observe(getViewLifecycleOwner(), new Observer<List<Stuff>>() {
-                    @Override
-                    public void onChanged(@Nullable List<Stuff> stuffs) {
-                        lentRecyclerViewAdapter.setLents(stuffs);
-                    }
-                });
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });
-
         return view;
     }
 
-    private void setWelcome(View view) {
-//        TextView title = view.findViewById(R.id.title);
-        String email = getUserFormSP(getActivity().getApplication()).getEmail();
-//        title.setText(email + " - Lent List");
-    }
 }

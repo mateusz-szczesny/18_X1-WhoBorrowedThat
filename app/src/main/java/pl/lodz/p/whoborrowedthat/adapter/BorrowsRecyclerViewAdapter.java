@@ -22,11 +22,6 @@ import static pl.lodz.p.whoborrowedthat.helper.ConstHelper.STUFF_BUNDLE__KEY;
 
 public class BorrowsRecyclerViewAdapter extends RecyclerView.Adapter<BorrowsRecyclerViewAdapter.ViewHolder> {
 
-    public void setVM(BorrowViewModel bvm) {
-        this.bvm = bvm;
-    }
-
-    private BorrowViewModel bvm;
     private final LayoutInflater inflater;
     private List<Stuff> stuffs;
 
