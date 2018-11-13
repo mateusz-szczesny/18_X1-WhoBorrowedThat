@@ -8,9 +8,6 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface AuthApi {
-
-    @Headers({"Content-Type: application/json"})
-
     @POST("v1/sessions")
     @FormUrlEncoded
     Call<User> login(
