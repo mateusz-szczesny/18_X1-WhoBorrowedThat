@@ -10,6 +10,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import pl.lodz.p.whoborrowedthat.coverter.CustomConverterFactory;
 import pl.lodz.p.whoborrowedthat.model.Stuff;
 import pl.lodz.p.whoborrowedthat.model.User;
+import pl.lodz.p.whoborrowedthat.model.UserRelation;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -109,5 +110,22 @@ public class ApiManager {
                 String.valueOf(user.getId()), String.valueOf(stuff.getBorrower().getId()),
                 stuff.getName(),a.format(stuff.getRentalDate()), a.format(stuff.getReturnDate()));
         userCall.enqueue(callback);
+    }
+
+    public MutableLiveData<List<UserRelation>> getUserRelations(User user) {
+        final MutableLiveData<List<UserRelation>> data = new MutableLiveData<>();
+        dataService.getUserRelations(user.getToken(), user.getEmail(), user.getId()).enqueue(new Callback<List<UserRelation>>() {
+            @Override
+            public void onResponse(Call<List<UserRelation>> call, Response<List<UserRelation>> response) {
+                data.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<UserRelation>> call, Throwable t) {
+                data.setValue(null);
+            }
+        });
+
+        return data;
     }
 }

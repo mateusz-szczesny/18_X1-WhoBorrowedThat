@@ -4,12 +4,14 @@ import java.util.Date;
 import java.util.List;
 
 import pl.lodz.p.whoborrowedthat.model.Stuff;
+import pl.lodz.p.whoborrowedthat.model.UserRelation;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface DataApi {
@@ -26,10 +28,11 @@ public interface DataApi {
             @Header("X-User-Email") String email
     );
 
-    @GET("v1/user_relations")
-    Call<List<Integer>> getUserFriends(
+    @GET("v1/user_relations/{id}")
+    Call<List<UserRelation>> getUserRelations(
             @Header("X-User-Token") String token,
-            @Header("X-User-Email") String email
+            @Header("X-User-Email") String email,
+            @Path("id") long id
     );
 
     @POST("v1/borrows")
