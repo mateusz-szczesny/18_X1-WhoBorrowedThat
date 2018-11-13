@@ -68,18 +68,16 @@ public abstract class AppBaseActivity extends AppCompatActivity implements MenuI
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
+        Intent intent;
         switch (item.getItemId()) {
-            //TODO handle on click menu
             case R.id.settings:
-                Intent intent = new Intent(getBaseContext(), SettingsActivity.class);
+                intent = new Intent(getBaseContext(), SettingsActivity.class);
                 getBaseContext().startActivity(intent);
-                //System.out.println("nav1=====================");
                 break;
             case R.id.nav_2:
-                // do whatever
-                System.out.println("nav1=====================");
+                intent = new Intent(getBaseContext(), AddFriendActivity.class);
+                getBaseContext().startActivity(intent);
                 break;
-            // and so on...
         }
         return false;
     }
