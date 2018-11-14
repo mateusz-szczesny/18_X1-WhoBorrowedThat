@@ -85,7 +85,7 @@ public class StuffAddActivity extends AppBaseActivity {
             @Override
             public void onClick(View view) {
                 stuff.setName(nameEditText.getText().toString());
-                UserRelation selectedUser = (UserRelation) friendsSpinner.getSelectedItem();
+                UserSelection selectedUser = (UserSelection) friendsSpinner.getSelectedItem();
                 stuff.getBorrower().setId(selectedUser.getId());
 
                 ApiManager.getInstance().addBorrows(SharedPrefHelper.getUserFormSP(getApplication()), stuff, new Callback<Object>() {

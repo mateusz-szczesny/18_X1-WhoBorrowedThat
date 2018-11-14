@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import pl.lodz.p.whoborrowedthat.R;
@@ -25,6 +26,9 @@ public class AddFriendActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_friend);
         Button btn = findViewById(R.id.submitBtn);
         final EditText inputEmail = findViewById(R.id.inputEmail);
+
+        TextView title = findViewById(R.id.title);
+        title.setText(SharedPrefHelper.getUserFormSP(getApplication()).getUsername() + "     " + SharedPrefHelper.getUserFormSP(getApplication()).getEmail());
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
