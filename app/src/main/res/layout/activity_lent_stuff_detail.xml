@@ -45,20 +45,6 @@ tools:context=".controller.BorrowedStuffDetailActivity">
         app:layout_constraintVertical_bias="0.078" />
 
     <TextView
-        android:id="@+id/returnDateString"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:text="Return date"
-        android:textColor="@android:color/white"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/borrowDateString"
-        app:layout_constraintTop_toBottomOf="@+id/borrowDateString" />
-
-    <TextView
         android:id="@+id/returnDate"
         android:layout_width="127dp"
         android:layout_height="wrap_content"
@@ -72,7 +58,21 @@ tools:context=".controller.BorrowedStuffDetailActivity">
         app:layout_constraintStart_toStartOf="@+id/borrowDate"
         app:layout_constraintTop_toBottomOf="@+id/borrowDate" />
 
-<TextView
+    <TextView
+        android:id="@+id/returnDateString"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="24dp"
+        android:text="Return date"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/borrowDateString"
+        app:layout_constraintTop_toBottomOf="@+id/borrowDateString" />
+
+    <TextView
     android:id="@+id/itemName"
     android:layout_width="65dp"
     android:layout_height="31dp"
@@ -110,14 +110,11 @@ tools:context=".controller.BorrowedStuffDetailActivity">
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="0dp"
-        android:layout_height="250dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="150dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@color/design_default_color_primary" />
 
 <TextView
