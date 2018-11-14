@@ -56,7 +56,7 @@ public class StuffAddActivity extends AppBaseActivity {
         nameEditText = findViewById(R.id.nameEditText);
         friendsSpinner = findViewById(R.id.friendsSpinner);
 
-        final List<Integer> list = new ArrayList<Integer>();
+        final List<UserSelection> list = new ArrayList<UserSelection>();
 
         UserRelationViewModel userRelationViewModel = ViewModelProviders.of(this).get(UserRelationViewModel.class);
         userRelationViewModel.getRelations().observe(this, new Observer<List<UserRelation>>() {
@@ -64,14 +64,14 @@ public class StuffAddActivity extends AppBaseActivity {
             public void onChanged(@Nullable List<UserRelation> relations) {
                 User user = SharedPrefHelper.getUserFormSP(getApplication());
                 for(UserRelation ur : relations) {
-                    System.out.println("->>>>>>>>>" + ur.getRelatingUser().getId());
-                    Integer id = (int)ur.getRelatedUser().getId();
-                    if ((int)user.getId() == id) {
-                        id = (int)ur.getRelatingUser().getId();
+                    User relatedUser;
+                    relatedUser = ur.getRelatedUser();
+                    if (user.getId() == relatedUser.getId()) {
+                        relatedUser = ur.getRelatingUser();
                     }
-                    list.add(id);
+                    list.add(new UserSelection((int)relatedUser.getId(), relatedUser.getUsername()));
                 }
-                ArrayAdapter<Integer> dataAdapter = new ArrayAdapter<Integer>(getApplicationContext(),
+                ArrayAdapter<UserSelection> dataAdapter = new ArrayAdapter<UserSelection>(getApplicationContext(),
                         android.R.layout.simple_spinner_item, list);
                 dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 friendsSpinner.setAdapter(dataAdapter);
@@ -85,7 +85,8 @@ public class StuffAddActivity extends AppBaseActivity {
             @Override
             public void onClick(View view) {
                 stuff.setName(nameEditText.getText().toString());
-                stuff.getBorrower().setId((Integer)friendsSpinner.getSelectedItem());
+                UserSelection selectedUser = (UserSelection) friendsSpinner.getSelectedItem();
+                stuff.getBorrower().setId(selectedUser.getId());
 
                 ApiManager.getInstance().addBorrows(SharedPrefHelper.getUserFormSP(getApplication()), stuff, new Callback<Object>() {
                     @Override
@@ -116,5 +117,36 @@ public class StuffAddActivity extends AppBaseActivity {
         DialogFragment newFragment = new DatePickerFragment();
         ((DatePickerFragment)newFragment).setFragmentSetup(estimatedReturnDateTextView, stuff.getRentalDate());
         newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
+    private class UserSelection {
+        int id;
+        String displayedName;
+
+        public UserSelection(int id, String displayedName) {
+            this.id = id;
+            this.displayedName = displayedName;
+        }
+
+        @Override
+        public String toString() {
+            return displayedName;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getDisplayedName() {
+            return displayedName;
+        }
+
+        public void setDisplayedName(String displayedName) {
+            this.displayedName = displayedName;
+        }
     }
 }

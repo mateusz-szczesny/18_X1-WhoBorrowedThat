@@ -42,7 +42,7 @@ public class LentRecyclerViewAdapter extends RecyclerView.Adapter<LentRecyclerVi
             final Stuff current = stuffs.get(position);
             //TODO: set specific data for one item after layout specified
 
-            holder.content.setText(current.getDesc());
+            holder.content.setText(current.getName());
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
