@@ -12,28 +12,25 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
 
 import pl.lodz.p.whoborrowedthat.R;
 import pl.lodz.p.whoborrowedthat.adapter.FriendsRecyclerViewAdapter;
-import pl.lodz.p.whoborrowedthat.adapter.LentRecyclerViewAdapter;
 import pl.lodz.p.whoborrowedthat.helper.SharedPrefHelper;
-import pl.lodz.p.whoborrowedthat.model.Stuff;
 import pl.lodz.p.whoborrowedthat.model.User;
 import pl.lodz.p.whoborrowedthat.model.UserRelation;
 import pl.lodz.p.whoborrowedthat.service.ApiManager;
-import pl.lodz.p.whoborrowedthat.viewmodel.LentViewModel;
 import pl.lodz.p.whoborrowedthat.viewmodel.UserRelationViewModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static pl.lodz.p.whoborrowedthat.helper.ConstHelper.VALID_EMAIL_ADDRESS_REGEX;
 
 public class AddFriendActivity extends AppCompatActivity {
 
@@ -66,37 +63,38 @@ public class AddFriendActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 User user = SharedPrefHelper.getUserFormSP(getApplication());
-                //TODO: add validation if input is empty
-                ApiManager.getInstance().setUserRelation(user, inputEmail.getText().toString().toLowerCase(), new Callback<UserRelation>() {
-                    @Override
-                    public void onResponse(Call<UserRelation> call, Response<UserRelation> response) {
-                        UserRelation responseUserRelation = response.body();
-                        if (response.isSuccessful() && responseUserRelation != null) {
-                            Toast.makeText(AddFriendActivity.this,
-                                    responseUserRelation.getRelatingUser().toString(),
-                                    Toast.LENGTH_LONG)
-                                    .show();
-                            Log.d("RESPONSE", responseUserRelation.getRelatedUser().toString() + responseUserRelation.getRelatingUser().toString());
-                        } else {
-                            Toast.makeText(AddFriendActivity.this,
-                                    String.format("Response is %s", String.valueOf(response.code()))
-                                    , Toast.LENGTH_LONG).show();
+                String inputData = String.valueOf(inputEmail.getText());
+                Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(inputData);
+                matcher.find();
+                if ("".equals(inputData) || !matcher.matches()){
+                    Toast.makeText(AddFriendActivity.this,
+                            String.format("INCORRECT INPUT!"), Toast.LENGTH_LONG).show();
+                } else {
+                    ApiManager.getInstance().setUserRelation(user, inputEmail.getText().toString().toLowerCase(), new Callback<UserRelation>() {
+                        @Override
+                        public void onResponse(Call<UserRelation> call, Response<UserRelation> response) {
+                            UserRelation responseUserRelation = response.body();
+                            if (response.isSuccessful() && responseUserRelation != null) {
+                                Toast.makeText(AddFriendActivity.this,
+                                        responseUserRelation.getRelatingUser().toString(),
+                                        Toast.LENGTH_LONG)
+                                        .show();
+                                Log.d("RESPONSE", responseUserRelation.getRelatedUser().toString() + responseUserRelation.getRelatingUser().toString());
+                            } else {
+                                Log.d("RESPONSE", String.format("Response is %s", String.valueOf(response.code())));
+                            }
+                            userRelationViewModel.refreshData(getApplication());
+                            mSwipeRefreshLayout.setRefreshing(false);
                         }
-                        userRelationViewModel.refreshData(getApplication());
-                        mSwipeRefreshLayout.setRefreshing(false);
-                        //TODO: Add validation message
-                    }
 
-                    @Override
-                    public void onFailure(Call<UserRelation> call, Throwable t) {
-                        Toast.makeText(AddFriendActivity.this,
-                                "Error is " + t.getMessage()
-                                , Toast.LENGTH_LONG).show();
-                        userRelationViewModel.refreshData(getApplication());
-                        mSwipeRefreshLayout.setRefreshing(false);
-                        //TODO: Add validation message
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<UserRelation> call, Throwable t) {
+                            Log.d("ERROR","Error is " + t.getMessage());
+                            userRelationViewModel.refreshData(getApplication());
+                            mSwipeRefreshLayout.setRefreshing(false);
+                        }
+                    });
+                }
             }
         });
 
