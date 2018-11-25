@@ -5,6 +5,7 @@ import java.util.List;
 import pl.lodz.p.whoborrowedthat.model.Stuff;
 import pl.lodz.p.whoborrowedthat.model.UserRelation;
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -60,5 +61,12 @@ public interface DataApi {
             @Header("X-User-Email") String email,
             @Path("borrowID") long borrowID,
             @Field("is_notified") Boolean status
+    );
+
+    @DELETE("v1/user_relations/{id}")
+    Call<Void> removeUserRelation(
+            @Path("id") long urID,
+            @Header("X-User-Token") String token,
+            @Header("X-User-Email") String email
     );
 }

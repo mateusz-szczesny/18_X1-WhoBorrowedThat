@@ -57,6 +57,8 @@ public class AddFriendActivity extends AppCompatActivity {
             }
         });
 
+        friendsRecyclerViewAdapter.setVM(userRelationViewModel);
+
         final SwipeRefreshLayout mSwipeRefreshLayout = findViewById(R.id.swipeRefreshLayoutFriend);
 
         btn.setOnClickListener(new View.OnClickListener() {

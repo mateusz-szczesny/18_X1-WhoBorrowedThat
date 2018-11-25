@@ -53,11 +53,11 @@ public class BorrowsRecyclerViewAdapter extends RecyclerView.Adapter<BorrowsRecy
     public void onBindViewHolder(@NonNull BorrowsRecyclerViewAdapter.ViewHolder holder, final int position) {
         if (stuffs != null) {
             final Stuff current = stuffs.get(position);
-            //TODO: set specific data for one item after layout specified
             holder.content.setText(current.getName());
             if (current.getNotified()) {
-                Log.d("STATUS", current.getNotified().toString());
                 holder.notification.setVisibility(View.VISIBLE);
+            } else {
+                holder.notification.setVisibility(View.INVISIBLE);
             }
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
