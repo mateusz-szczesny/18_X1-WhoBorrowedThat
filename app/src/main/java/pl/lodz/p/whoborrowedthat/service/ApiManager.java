@@ -59,8 +59,10 @@ public class ApiManager {
         switch (stuffType) {
             case BORROWED:
                 getBorrowedStuff(user, callback);
+                break;
             case LENT:
                 getLentStuff(user, callback);
+                break;
         }
     }
 
