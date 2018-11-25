@@ -63,6 +63,10 @@ public class LoginActivity extends AppCompatActivity {
                                 SharedPrefHelper.storeUserInSharedPrefs(responseUser, getApplication());
                                 onLogInSuccess();
                             } else {
+                                Toast.makeText(LoginActivity.this,
+                                        "No user found!",
+                                        Toast.LENGTH_LONG)
+                                        .show();
                                 Log.d("ERROR", response.message());
                             }
                         }
