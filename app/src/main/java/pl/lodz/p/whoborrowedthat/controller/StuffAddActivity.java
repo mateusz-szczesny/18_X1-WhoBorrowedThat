@@ -2,6 +2,7 @@ package pl.lodz.p.whoborrowedthat.controller;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -92,15 +93,14 @@ public class StuffAddActivity extends AppBaseActivity {
                     @Override
                     public void onResponse(Call<Object> call, Response<Object> response) {
                         Toast.makeText(StuffAddActivity.this,
-                                String.format("Response is %s", String.valueOf(response.code()))
+                                "Borrow added!"
                                 , Toast.LENGTH_LONG).show();
+                        finish();
                     }
 
                     @Override
                     public void onFailure(Call<Object> call, Throwable t) {
-                        Toast.makeText(StuffAddActivity.this,
-                                "error"
-                                , Toast.LENGTH_LONG).show();
+                        Log.d("ERROR", t.getMessage());
                     }
                 });
             }
