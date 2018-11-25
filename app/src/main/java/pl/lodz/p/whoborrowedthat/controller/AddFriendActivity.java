@@ -66,6 +66,7 @@ public class AddFriendActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 User user = SharedPrefHelper.getUserFormSP(getApplication());
+                //TODO: add validation if input is empty
                 ApiManager.getInstance().setUserRelation(user, inputEmail.getText().toString().toLowerCase(), new Callback<UserRelation>() {
                     @Override
                     public void onResponse(Call<UserRelation> call, Response<UserRelation> response) {
@@ -83,6 +84,7 @@ public class AddFriendActivity extends AppCompatActivity {
                         }
                         userRelationViewModel.refreshData(getApplication());
                         mSwipeRefreshLayout.setRefreshing(false);
+                        //TODO: Add validation message
                     }
 
                     @Override
@@ -92,6 +94,7 @@ public class AddFriendActivity extends AppCompatActivity {
                                 , Toast.LENGTH_LONG).show();
                         userRelationViewModel.refreshData(getApplication());
                         mSwipeRefreshLayout.setRefreshing(false);
+                        //TODO: Add validation message
                     }
                 });
             }
