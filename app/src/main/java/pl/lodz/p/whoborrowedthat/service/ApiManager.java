@@ -103,4 +103,8 @@ public class ApiManager {
     public void setUserRelation(User user, String emailToAdd, Callback<UserRelation> callback) {
         dataService.setUserRelation(user.getToken(), user.getEmail(), emailToAdd).enqueue(callback);
     }
+
+    public void removeUserRelation(User user, long urID, Callback<Void> callback) {
+        dataService.removeUserRelation(urID, user.getToken(), user.getEmail()).enqueue(callback);
+    }
 }
