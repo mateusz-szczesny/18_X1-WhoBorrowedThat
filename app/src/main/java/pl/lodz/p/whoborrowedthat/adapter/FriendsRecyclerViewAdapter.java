@@ -30,9 +30,9 @@ public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecy
     private List<UserRelation> friends;
     private Application application;
 
-    public FriendsRecyclerViewAdapter(Context context, Application application) {
+    public FriendsRecyclerViewAdapter(Application application) {
         this.application = application;
-        inflater = LayoutInflater.from(context);
+        inflater = LayoutInflater.from(application.getApplicationContext());
     }
 
     @NonNull

@@ -2,12 +2,21 @@ package pl.lodz.p.whoborrowedthat.controller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 
 import pl.lodz.p.whoborrowedthat.R;
+import pl.lodz.p.whoborrowedthat.helper.SharedPrefHelper;
 import pl.lodz.p.whoborrowedthat.model.Stuff;
+import pl.lodz.p.whoborrowedthat.model.User;
+import pl.lodz.p.whoborrowedthat.service.ApiManager;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static pl.lodz.p.whoborrowedthat.helper.ConstHelper.STUFF_BUNDLE__KEY;
 
@@ -18,6 +27,8 @@ public class LentStuffDetailActivity extends AppBaseActivity {
     private TextView returnDate;
     private TextView borrowerName;
     private SimpleDateFormat dateFormat;
+    private Button sendRemainder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +42,30 @@ public class LentStuffDetailActivity extends AppBaseActivity {
         dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
         Bundle bundle = getIntent().getExtras();
+
+        sendRemainder = findViewById(R.id.sendRemainder);
+
+        sendRemainder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                User currentUser = SharedPrefHelper.getUserFormSP(getApplication());
+                ApiManager.getInstance().notifyBorrow(currentUser, stuff.getId(), new Callback<Object>() {
+                    @Override
+                    public void onResponse(Call<Object> call, Response<Object> response) {
+                        Toast.makeText(LentStuffDetailActivity.this,
+                                "Remainder sent!"
+                                , Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Object> call, Throwable t) {
+                        Toast.makeText(LentStuffDetailActivity.this,
+                                "Cannot send a remainder :("
+                                , Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
 
         if (bundle != null && bundle.getSerializable(STUFF_BUNDLE__KEY) != null) {
             stuff = (Stuff) bundle.getSerializable(STUFF_BUNDLE__KEY);

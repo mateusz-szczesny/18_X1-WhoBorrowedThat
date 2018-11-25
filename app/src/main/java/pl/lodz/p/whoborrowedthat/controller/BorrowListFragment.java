@@ -49,7 +49,7 @@ public class BorrowListFragment extends Fragment {
         Context context = view.getContext();
         RecyclerView recyclerView = view.findViewById(R.id.listOfBorrowedStuff);
 
-        final BorrowsRecyclerViewAdapter borrowsRecyclerViewAdapter = new BorrowsRecyclerViewAdapter(context);
+        final BorrowsRecyclerViewAdapter borrowsRecyclerViewAdapter = new BorrowsRecyclerViewAdapter(getActivity().getApplication());
         recyclerView.setAdapter(borrowsRecyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setItemAnimator(new DefaultItemAnimator());

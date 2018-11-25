@@ -8,8 +8,8 @@
             android:id="@+id/friends"
             android:title="MY FRIENDS" />
         <item
-            android:id="@+id/nav_3"
-            android:title="CALENDAR" />
+            android:id="@+id/blank"
+            android:title="" />
         <item
             android:id="@+id/logout"
             android:title="LOGOUT" />

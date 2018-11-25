@@ -10,34 +10,37 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.TextView;
+
+
+import java.util.Objects;
 
 import pl.lodz.p.whoborrowedthat.R;
 import pl.lodz.p.whoborrowedthat.helper.SharedPrefHelper;
+import pl.lodz.p.whoborrowedthat.model.User;
 
 public abstract class AppBaseActivity extends AppCompatActivity implements MenuItem.OnMenuItemClickListener {
-    private FrameLayout view_stub; //This is the framelayout to keep your content view
-    private NavigationView navigation_view; // The new navigation view from Android Design Library. Can inflate menu resources. Easy
-    private Menu drawerMenu;
+    private FrameLayout view_stub;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.setContentView(R.layout.activity_app_base);// The base layout that contains your navigation drawer.
-        view_stub = (FrameLayout) findViewById(R.id.view_stub);
-        navigation_view = (NavigationView) findViewById(R.id.navigation_view);
+        super.setContentView(R.layout.activity_app_base);
+        view_stub = findViewById(R.id.view_stub);
+        NavigationView navigation_view = findViewById(R.id.navigation_view);
 
-        drawerMenu = navigation_view.getMenu();
+        //Set Welcome message
+        View headerLayout = navigation_view.inflateHeaderView(R.layout.nav_header);
+        TextView header = headerLayout.findViewById(R.id.USER_NAME);
+        User user = SharedPrefHelper.getUserFormSP(getApplication());
+        header.setText("Welcome " + user.getUsername() + "!");
+
+        Menu drawerMenu = navigation_view.getMenu();
         for(int i = 0; i < drawerMenu.size(); i++) {
             drawerMenu.getItem(i).setOnMenuItemClickListener(this);
         }
-        // and so on...
     }
 
-
-
-    /* Override all setContentView methods to put the content view to the FrameLayout view_stub
-     * so that, we can make other activity implementations looks like normal activity subclasses.
-     */
     @Override
     public void setContentView(int layoutResID) {
         if (view_stub != null) {
@@ -45,7 +48,7 @@ public abstract class AppBaseActivity extends AppCompatActivity implements MenuI
             ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT);
-            View stubView = inflater.inflate(layoutResID, view_stub, false);
+            View stubView = Objects.requireNonNull(inflater).inflate(layoutResID, view_stub, false);
             view_stub.addView(stubView, lp);
         }
     }

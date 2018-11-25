@@ -53,7 +53,7 @@ public class LentListFragment extends Fragment {
         Context context = view.getContext();
         RecyclerView recyclerView = view.findViewById(R.id.listOfBorrowedStuff);
 
-        final LentRecyclerViewAdapter lentRecyclerViewAdapter = new LentRecyclerViewAdapter(context);
+        final LentRecyclerViewAdapter lentRecyclerViewAdapter = new LentRecyclerViewAdapter(getActivity().getApplication());
         recyclerView.setAdapter(lentRecyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setItemAnimator(new DefaultItemAnimator());

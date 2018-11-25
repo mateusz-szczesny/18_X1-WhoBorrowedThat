@@ -34,6 +34,9 @@ public class Stuff implements Serializable {
     @SerializedName("return_date")
     private Date returnDate;
 
+    @SerializedName("is_notified")
+    private Boolean isNotified;
+
     public long getId() {
         return id;
     }
@@ -106,11 +109,20 @@ public class Stuff implements Serializable {
         this.returnDate = returnDate;
     }
 
+    public Boolean getNotified() {
+        return isNotified;
+    }
+
+    public void setNotified(Boolean notified) {
+        isNotified = notified;
+    }
+
     public Stuff() {
         borrower = new User();
         owner = new User();
         rentalDate = new Date();
         estimatedReturnDate = new Date();
         returnDate = new Date();
+        isNotified = false;
     }
 }

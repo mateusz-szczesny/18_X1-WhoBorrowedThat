@@ -44,7 +44,7 @@ public class AddFriendActivity extends AppCompatActivity {
         Context context = getApplicationContext();
         RecyclerView recyclerView = findViewById(R.id.listOfFriends);
 
-        final FriendsRecyclerViewAdapter friendsRecyclerViewAdapter = new FriendsRecyclerViewAdapter(context, getApplication());
+        final FriendsRecyclerViewAdapter friendsRecyclerViewAdapter = new FriendsRecyclerViewAdapter(getApplication());
         recyclerView.setAdapter(friendsRecyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
