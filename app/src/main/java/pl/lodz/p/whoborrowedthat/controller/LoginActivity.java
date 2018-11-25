@@ -24,6 +24,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static pl.lodz.p.whoborrowedthat.helper.ConstHelper.MINIMUM_PASSWORD_LENGTH;
 import static pl.lodz.p.whoborrowedthat.helper.ConstHelper.VALID_EMAIL_ADDRESS_REGEX;
 
 public class LoginActivity extends AppCompatActivity {
@@ -44,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
                 String email = emailText.getText().toString();
                 String password = passowrdText.getText().toString();
                 Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
-                if (password.length() < 6  || !matcher.matches()) {
+                if (password.length() < MINIMUM_PASSWORD_LENGTH  || !matcher.matches()) {
                     Toast.makeText(LoginActivity.this,
                             "Incorrect input!",
                             Toast.LENGTH_LONG).show();

@@ -3,10 +3,13 @@ package pl.lodz.p.whoborrowedthat.controller;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.regex.Matcher;
 
 import pl.lodz.p.whoborrowedthat.R;
 import pl.lodz.p.whoborrowedthat.helper.SharedPrefHelper;
@@ -15,6 +18,9 @@ import pl.lodz.p.whoborrowedthat.service.ApiManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static pl.lodz.p.whoborrowedthat.helper.ConstHelper.MINIMUM_PASSWORD_LENGTH;
+import static pl.lodz.p.whoborrowedthat.helper.ConstHelper.VALID_EMAIL_ADDRESS_REGEX;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText editTextEmail;
@@ -41,38 +47,42 @@ public class RegisterActivity extends AppCompatActivity {
                 String password = editTextPassword.getText().toString();
                 String passwordConfirmation = getEditTextPasswordConfirmation.getText().toString();
 
-                if (password.equals(passwordConfirmation)) {
+                Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
+                if (password.equals(passwordConfirmation) && matcher.matches() && password.length() >= MINIMUM_PASSWORD_LENGTH) {
                     ApiManager.getInstance().registerUser(email, password, passwordConfirmation, new Callback<User>() {
                         @Override
                         public void onResponse(Call<User> call, Response<User> response) {
                             User responseUser = response.body();
                             if (response.isSuccessful() && responseUser != null) {
                                 Toast.makeText(RegisterActivity.this,
-                                        responseUser.getToken(),
+                                        "REGISTERED SUCCESSFULLY!",
                                         Toast.LENGTH_LONG)
                                         .show();
-                                SharedPrefHelper.storeUserInSharedPrefs(responseUser, getApplication());
 
-                                Intent intent = new Intent(RegisterActivity.this, BorrowLentListActivity.class);
-                                RegisterActivity.this.startActivity(intent);
+                                //Save registered user to SP
+                                SharedPrefHelper.storeUserInSharedPrefs(responseUser, getApplication());
+                                onRegisterSuccess();
                             } else {
-                                Toast.makeText(RegisterActivity.this,
-                                        String.format("Response is %s", String.valueOf(response.code()))
-                                        , Toast.LENGTH_LONG).show();
+                                Log.d("ERROR", response.message());
                             }
                         }
 
                         @Override
                         public void onFailure(Call<User> call, Throwable t) {
                             Toast.makeText(RegisterActivity.this,
-                                    "Error is " + t.getMessage()
+                                    "Cannot register!\nPlease try again later."
                                     , Toast.LENGTH_LONG).show();
                         }
                     });
                 } else {
-                    Toast.makeText(RegisterActivity.this, "Passwords are not the same", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Incorrect input data!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    private void onRegisterSuccess() {
+        Intent intent = new Intent(RegisterActivity.this, BorrowLentListActivity.class);
+        RegisterActivity.this.startActivity(intent);
     }
 }
