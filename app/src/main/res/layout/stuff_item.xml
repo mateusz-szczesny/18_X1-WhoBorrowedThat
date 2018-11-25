@@ -41,7 +41,7 @@
         android:layout_height="21dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/roboto_light"
-        android:text="how much"
+        android:text="how many"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
