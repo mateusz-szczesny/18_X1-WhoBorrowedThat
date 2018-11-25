@@ -74,8 +74,8 @@ public class ApiManager {
         dataService.getBorrowedThingsByUserEmail(user.getToken(), user.getEmail()).enqueue(callback);
     }
 
-    public void registerUser(String email, String password, String passwordConfirmation, Callback<User> callback) {
-        Call<User> userCall = authService.register(email, password, passwordConfirmation);
+    public void registerUser(String email, String password, String passwordConfirmation,String username,  Callback<User> callback) {
+        Call<User> userCall = authService.register(email, password, passwordConfirmation, username);
         userCall.enqueue(callback);
     }
 

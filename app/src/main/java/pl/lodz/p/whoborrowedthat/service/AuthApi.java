@@ -20,6 +20,7 @@ public interface AuthApi {
     Call<User> register(
             @Field("email") String email,
             @Field("password") String password,
-            @Field("password_confirmation") String passwordConfirmation
+            @Field("password_confirmation") String passwordConfirmation,
+            @Field("username") String username
     );
 }

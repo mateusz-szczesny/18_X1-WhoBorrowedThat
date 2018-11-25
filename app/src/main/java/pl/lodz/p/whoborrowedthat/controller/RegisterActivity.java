@@ -26,6 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText editTextEmail;
     private EditText editTextPassword;
     private EditText getEditTextPasswordConfirmation;
+    private EditText editTextUsername;
     private Button buttonSignUp;
 
     @Override
@@ -38,6 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
         getEditTextPasswordConfirmation = findViewById(R.id.editTextPasswordConfirmation);
+        editTextUsername = findViewById(R.id.editTextUsername);
         buttonSignUp = findViewById(R.id.buttonSignUp);
 
         buttonSignUp.setOnClickListener(new View.OnClickListener() {
@@ -46,10 +48,11 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = editTextEmail.getText().toString();
                 String password = editTextPassword.getText().toString();
                 String passwordConfirmation = getEditTextPasswordConfirmation.getText().toString();
+                String username = editTextUsername.getText().toString();
 
                 Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
                 if (password.equals(passwordConfirmation) && matcher.matches() && password.length() >= MINIMUM_PASSWORD_LENGTH) {
-                    ApiManager.getInstance().registerUser(email, password, passwordConfirmation, new Callback<User>() {
+                    ApiManager.getInstance().registerUser(email, password, passwordConfirmation, username, new Callback<User>() {
                         @Override
                         public void onResponse(Call<User> call, Response<User> response) {
                             User responseUser = response.body();
