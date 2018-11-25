@@ -34,7 +34,8 @@
         <activity
             android:name=".controller.BorrowLentListActivity"
             android:label="@string/title_activity_borrow_lent_list"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".controller.BorrowedStuffDetailActivity" />
         <activity android:name=".controller.LentStuffDetailActivity" />
         <activity android:name=".controller.StuffAddActivity" />

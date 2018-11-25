@@ -4,10 +4,15 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import pl.lodz.p.whoborrowedthat.model.Stuff;
 import pl.lodz.p.whoborrowedthat.model.User;
@@ -21,6 +26,8 @@ import static pl.lodz.p.whoborrowedthat.helper.SharedPrefHelper.getUserFormSP;
 public class BorrowViewModel extends AndroidViewModel {
     private final MutableLiveData<List<Stuff>> allBorrows;
     private final ApiManager apiManager;
+    private List<Stuff> searchBorrows;
+    private List<Stuff> allStuffs;
 
     public BorrowViewModel(Application application) {
         super(application);
@@ -41,7 +48,8 @@ public class BorrowViewModel extends AndroidViewModel {
         apiManager.getStuff(ApiManager.StuffType.BORROWED, user, new Callback<List<Stuff>>() {
             @Override
             public void onResponse(@NonNull Call<List<Stuff>> call, @NonNull Response<List<Stuff>> response) {
-                allBorrows.setValue(response.body());
+                allStuffs = response.body();
+                allBorrows.setValue(allStuffs);
             }
 
             @Override
@@ -55,6 +63,25 @@ public class BorrowViewModel extends AndroidViewModel {
         User user = getUserFormSP(application);
         if (user != null) {
             fetchData(user);
+        }
+    }
+
+    public void search(String searchText) {
+        if(searchText == null && searchText.equals("")) {
+            allBorrows.setValue(allStuffs);
+        } else {
+            Pattern pattern = Pattern.compile(searchText.toLowerCase());
+            searchBorrows = new ArrayList<>();
+            for (Stuff stuff : allStuffs) {
+                if (stuff.getName() != null) {
+                    Matcher matcher = pattern.matcher(stuff.getName().toLowerCase());
+                    //Log.d("matcher", String.valueOf(matcher.find()));
+                    if(matcher.find()) {
+                        searchBorrows.add(stuff);
+                    }
+                }
+            }
+            allBorrows.setValue(searchBorrows);
         }
     }
 }

@@ -21,12 +21,13 @@ import java.util.List;
 
 import pl.lodz.p.whoborrowedthat.R;
 import pl.lodz.p.whoborrowedthat.adapter.LentRecyclerViewAdapter;
+import pl.lodz.p.whoborrowedthat.command.SearchCommand;
 import pl.lodz.p.whoborrowedthat.model.Stuff;
 import pl.lodz.p.whoborrowedthat.viewmodel.LentViewModel;
 
 import static pl.lodz.p.whoborrowedthat.helper.SharedPrefHelper.getUserFormSP;
 
-public class LentListFragment extends Fragment {
+public class LentListFragment extends Fragment implements SearchCommand{
 
     private LentViewModel lentViewModel;
     private FloatingActionButton addButton;
@@ -86,4 +87,8 @@ public class LentListFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void execute(String searchText) {
+        lentViewModel.search(searchText);
+    }
 }
