@@ -64,6 +64,7 @@ public class BorrowsRecyclerViewAdapter extends RecyclerView.Adapter<BorrowsRecy
                 @Override
                 public void onClick(View v) {
                     User user = SharedPrefHelper.getUserFormSP(application);
+
                     ApiManager.getInstance().readNotification(user, stuffs.get(position).getId(), new Callback<Object>() {
                         @Override
                         public void onResponse(Call<Object> call, Response<Object> response) {
@@ -75,6 +76,7 @@ public class BorrowsRecyclerViewAdapter extends RecyclerView.Adapter<BorrowsRecy
                             Log.d("RESPONSE", "Cannot send a remainder :(");
                         }
                     });
+
                     Intent intent = new Intent(v.getContext(), BorrowedStuffDetailActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(STUFF_BUNDLE__KEY, stuffs.get(position));
