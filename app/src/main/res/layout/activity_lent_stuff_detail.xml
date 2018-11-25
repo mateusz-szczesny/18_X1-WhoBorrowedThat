@@ -6,7 +6,7 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:background="@color/colorPrimaryDark"
-tools:context=".controller.BorrowedStuffDetailActivity">
+tools:context=".controller.LentStuffDetailActivity">
 
     <TextView
         android:id="@+id/borrowDateString"
@@ -164,7 +164,7 @@ tools:context=".controller.BorrowedStuffDetailActivity">
     app:layout_constraintTop_toBottomOf="@+id/itemName" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/sendRemainder"
         android:layout_width="135dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

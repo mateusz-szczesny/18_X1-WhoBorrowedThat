@@ -1,13 +1,21 @@
 package pl.lodz.p.whoborrowedthat.controller;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 
 import pl.lodz.p.whoborrowedthat.R;
+import pl.lodz.p.whoborrowedthat.helper.SharedPrefHelper;
 import pl.lodz.p.whoborrowedthat.model.Stuff;
+import pl.lodz.p.whoborrowedthat.model.User;
+import pl.lodz.p.whoborrowedthat.service.ApiManager;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static pl.lodz.p.whoborrowedthat.helper.ConstHelper.STUFF_BUNDLE__KEY;
 
