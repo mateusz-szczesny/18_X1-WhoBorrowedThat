@@ -9,4 +9,5 @@ public class ConstHelper {
     public static final String STUFF_BUNDLE__KEY = "STUFF_BNDL_KEY";
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+    public static final int MINIMUM_PASSWORD_LENGTH = 6;
 }
