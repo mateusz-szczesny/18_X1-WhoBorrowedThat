@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 
 import pl.lodz.p.whoborrowedthat.R;
 import pl.lodz.p.whoborrowedthat.adapter.BorrowsRecyclerViewAdapter;
+import pl.lodz.p.whoborrowedthat.command.SearchCommand;
 import pl.lodz.p.whoborrowedthat.model.Stuff;
 import pl.lodz.p.whoborrowedthat.viewmodel.BorrowViewModel;
 
@@ -24,7 +25,7 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class BorrowListFragment extends Fragment {
+public class BorrowListFragment extends Fragment implements SearchCommand {
 
     private BorrowViewModel borrowViewModel;
     private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -39,6 +40,7 @@ public class BorrowListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -72,5 +74,10 @@ public class BorrowListFragment extends Fragment {
     });
 
         return view;
-}
+    }
+
+    @Override
+    public void execute(String searchText) {
+        borrowViewModel.search(searchText);
+    }
 }

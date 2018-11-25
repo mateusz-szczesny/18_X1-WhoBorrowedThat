@@ -10,6 +10,8 @@ import android.text.Layout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import pl.lodz.p.whoborrowedthat.model.Stuff;
 import pl.lodz.p.whoborrowedthat.model.User;
@@ -23,6 +25,8 @@ import static pl.lodz.p.whoborrowedthat.helper.SharedPrefHelper.getUserFormSP;
 public class LentViewModel extends AndroidViewModel {
     private final MutableLiveData<List<Stuff>> allLents;
     private final ApiManager apiManager;
+    private List<Stuff> searchLents;
+    private List<Stuff> allStuffs;
 
     public LentViewModel(Application application) {
         super(application);
@@ -43,7 +47,8 @@ public class LentViewModel extends AndroidViewModel {
         apiManager.getStuff(ApiManager.StuffType.LENT, user, new Callback<List<Stuff>>() {
             @Override
             public void onResponse(@NonNull Call<List<Stuff>> call, @NonNull Response<List<Stuff>> response) {
-                allLents.setValue(response.body());
+                allStuffs = response.body();
+                allLents.setValue(allStuffs);
             }
 
             @Override
@@ -57,6 +62,25 @@ public class LentViewModel extends AndroidViewModel {
         User user = getUserFormSP(application);
         if (user != null) {
             fetchData(user);
+        }
+    }
+
+    public void search(String searchText) {
+        if(searchText == null && searchText.equals("")) {
+            allLents.setValue(allStuffs);
+        } else {
+            Pattern pattern = Pattern.compile(searchText.toLowerCase());
+            searchLents = new ArrayList<>();
+            for (Stuff stuff : allStuffs) {
+                if (stuff.getName() != null) {
+                    Matcher matcher = pattern.matcher(stuff.getName().toLowerCase());
+                    //Log.d("matcher", String.valueOf(matcher.find()));
+                    if(matcher.find()) {
+                        searchLents.add(stuff);
+                    }
+                }
+            }
+            allLents.setValue(searchLents);
         }
     }
 }
