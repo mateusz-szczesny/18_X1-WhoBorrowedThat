@@ -10,6 +10,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface DataApi {
@@ -50,5 +51,14 @@ public interface DataApi {
             @Field("name") String name,
             @Field("rental_date") String rentalDate,
             @Field("estimated_return_date") String estimatedReturnDate
+    );
+
+    @PUT("v1/borrows/{borrowID}/notify")
+    @FormUrlEncoded
+    Call<Object> notify(
+            @Header("X-User-Token") String token,
+            @Header("X-User-Email") String email,
+            @Path("borrowID") long borrowID,
+            @Field("is_notified") Boolean status
     );
 }

@@ -77,6 +77,15 @@ public class ApiManager {
         userCall.enqueue(callback);
     }
 
+    public void notifyBorrow(User user, long id, Callback<Object> callback) {
+        Call<Object> queue = dataService.notify(user.getToken(), user.getEmail(), id, true);
+        queue.enqueue(callback);
+    }
+    public void readNotification(User user, long id, Callback<Object> callback) {
+        Call<Object> queue = dataService.notify(user.getToken(), user.getEmail(), id, false);
+        queue.enqueue(callback);
+    }
+
     public void addBorrows(User user, Stuff stuff, Callback<Object> callback) {
         SimpleDateFormat a  = new SimpleDateFormat("dd-MM-YYYY");
         Call<Object> userCall = dataService.addBorrows(user.getToken(), user.getEmail(),

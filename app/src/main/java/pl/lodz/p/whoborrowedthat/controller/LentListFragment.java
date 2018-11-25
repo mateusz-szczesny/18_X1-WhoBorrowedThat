@@ -54,13 +54,13 @@ public class LentListFragment extends Fragment implements SearchCommand{
         Context context = view.getContext();
         RecyclerView recyclerView = view.findViewById(R.id.listOfBorrowedStuff);
 
-        final LentRecyclerViewAdapter lentRecyclerViewAdapter = new LentRecyclerViewAdapter(context);
+        final LentRecyclerViewAdapter lentRecyclerViewAdapter = new LentRecyclerViewAdapter(getActivity().getApplication());
         recyclerView.setAdapter(lentRecyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         lentViewModel = ViewModelProviders.of(this).get(LentViewModel.class);
-        lentViewModel.getAllLents().observe(this, new Observer<List<Stuff>>() {
+        lentViewModel.getAllLents().observe(getViewLifecycleOwner(), new Observer<List<Stuff>>() {
             @Override
             public void onChanged(@Nullable List<Stuff> stuffs) {
                 lentRecyclerViewAdapter.setLents(stuffs);

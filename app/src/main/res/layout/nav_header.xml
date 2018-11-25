@@ -5,13 +5,23 @@
     android:background="?attr/colorPrimaryDark"
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
-    android:orientation="vertical"
-    android:gravity="bottom">
+    android:orientation="vertical">
 
     <TextView
+        android:id="@+id/APP_NAME"
+        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="My header title"
+        android:gravity="top"
+        android:text="Who Borrowed That?"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+
+    <TextView
+        android:id="@+id/USER_NAME"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="TITLE_HERE"
+        android:gravity="bottom"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
 </LinearLayout>
