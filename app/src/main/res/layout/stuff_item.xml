@@ -41,7 +41,7 @@
         android:layout_height="21dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/roboto_light"
-        android:text="how many"
+        android:text="how much"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -52,10 +52,10 @@
         android:id="@+id/notification"
         android:layout_width="28dp"
         android:layout_height="28dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:src="@mipmap/ic_notification"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@mipmap/ic_notification"
-        android:visibility="invisible"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 </android.support.constraint.ConstraintLayout>
