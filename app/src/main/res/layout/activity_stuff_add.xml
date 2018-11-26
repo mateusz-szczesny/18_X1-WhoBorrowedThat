@@ -123,7 +123,7 @@
         android:outlineAmbientShadowColor="@android:color/white"
         android:outlineSpotShadowColor="@android:color/white"
         android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="@+id/button5"
+        app:layout_constraintEnd_toEndOf="@+id/fromGalleryButton"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView10"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
@@ -171,11 +171,11 @@
         android:layout_marginTop="24dp"
         android:text="lent to"
         android:textColor="@android:color/white"
-        app:layout_constraintStart_toStartOf="@+id/button4"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+        app:layout_constraintStart_toStartOf="@+id/makePhotoButton"
+        app:layout_constraintTop_toBottomOf="@+id/makePhotoButton" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/makePhotoButton"
         android:layout_width="115dp"
         android:layout_height="30dp"
         android:layout_marginTop="12dp"
@@ -184,13 +184,13 @@
         android:fontFamily="@font/roboto_light"
         android:text="make photo"
         android:textAllCaps="false"
-        app:layout_constraintEnd_toStartOf="@+id/button5"
+        app:layout_constraintEnd_toStartOf="@+id/fromGalleryButton"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/nameEditText"
         app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/fromGalleryButton"
         android:layout_width="115dp"
         android:layout_height="30dp"
         android:layout_marginTop="12dp"
