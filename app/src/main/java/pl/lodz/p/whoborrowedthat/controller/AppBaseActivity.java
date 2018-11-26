@@ -21,6 +21,7 @@ import pl.lodz.p.whoborrowedthat.model.User;
 
 public abstract class AppBaseActivity extends AppCompatActivity implements MenuItem.OnMenuItemClickListener {
     private FrameLayout view_stub;
+    private TextView header;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,7 @@ public abstract class AppBaseActivity extends AppCompatActivity implements MenuI
 
         //Set Welcome message
         View headerLayout = navigation_view.inflateHeaderView(R.layout.nav_header);
-        TextView header = headerLayout.findViewById(R.id.USER_NAME);
+        header = headerLayout.findViewById(R.id.USER_NAME);
         User user = SharedPrefHelper.getUserFormSP(getApplication());
         header.setText("Welcome " + user.getUsername() + "!");
 
@@ -91,5 +92,16 @@ public abstract class AppBaseActivity extends AppCompatActivity implements MenuI
                 break;
         }
         return false;
+    }
+
+    protected void updateUserDetails(){
+        User user = SharedPrefHelper.getUserFormSP(getApplication());
+        header.setText("Welcome " + user.getUsername() + "!");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateUserDetails();
     }
 }

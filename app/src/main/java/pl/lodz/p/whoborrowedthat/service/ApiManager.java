@@ -6,6 +6,7 @@ import java.util.List;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import pl.lodz.p.whoborrowedthat.coverter.CustomConverterFactory;
+import pl.lodz.p.whoborrowedthat.helper.SharedPrefHelper;
 import pl.lodz.p.whoborrowedthat.model.Stuff;
 import pl.lodz.p.whoborrowedthat.model.User;
 import pl.lodz.p.whoborrowedthat.model.UserRelation;
@@ -106,5 +107,10 @@ public class ApiManager {
 
     public void removeUserRelation(User user, long urID, Callback<Void> callback) {
         dataService.removeUserRelation(urID, user.getToken(), user.getEmail()).enqueue(callback);
+    }
+
+    public void updateUsername(User user, String username, Callback<Void> callback) {
+        Call<Void> queue = authService.setUsername(user.getToken(), user.getEmail(), username);
+        queue.enqueue(callback);
     }
 }
