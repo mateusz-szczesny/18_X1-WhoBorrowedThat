@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -50,6 +51,8 @@ public class LoginActivity extends AppCompatActivity {
                             "Incorrect input!",
                             Toast.LENGTH_LONG).show();
                 } else {
+                    getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                     ApiManager.getInstance().loginUser(email, password, new Callback<User>() {
                         @Override
                         public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
@@ -62,12 +65,14 @@ public class LoginActivity extends AppCompatActivity {
                                 //Save logged user to SP
                                 SharedPrefHelper.storeUserInSharedPrefs(responseUser, getApplication());
                                 onLogInSuccess();
+                                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                             } else {
                                 Toast.makeText(LoginActivity.this,
                                         "No user found!",
                                         Toast.LENGTH_LONG)
                                         .show();
                                 Log.d("ERROR", response.message());
+                                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                             }
                         }
 
