@@ -37,6 +37,7 @@ public class SettingsActivity extends AppBaseActivity {
                             "Username can not be empty"
                             , Toast.LENGTH_LONG).show();
                 } else {
+                    updateButton.setEnabled(false);
                     ApiManager.getInstance().updateUsername(SharedPrefHelper.getUserFormSP(getApplication()), username, new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
@@ -48,6 +49,7 @@ public class SettingsActivity extends AppBaseActivity {
                             SharedPrefHelper.storeUserInSharedPrefs(user,getApplication());
                             Log.d("username", SharedPrefHelper.getUserFormSP(getApplication()).getUsername());
                             updateUserDetails();
+                            updateButton.setEnabled(true);
                         }
 
                         @Override
@@ -55,6 +57,7 @@ public class SettingsActivity extends AppBaseActivity {
                             Toast.makeText(SettingsActivity.this,
                                     "Something went wrong"
                                     , Toast.LENGTH_LONG).show();
+                            updateButton.setEnabled(true);
                         }
                     });
                 }

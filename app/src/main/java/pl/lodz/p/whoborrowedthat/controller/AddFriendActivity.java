@@ -33,12 +33,12 @@ import retrofit2.Response;
 import static pl.lodz.p.whoborrowedthat.helper.ConstHelper.VALID_EMAIL_ADDRESS_REGEX;
 
 public class AddFriendActivity extends AppCompatActivity {
-
+    private Button submitBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend);
-        Button btn = findViewById(R.id.submitBtn);
+        submitBtn = findViewById(R.id.submitBtn);
         final EditText inputEmail = findViewById(R.id.inputEmail);
 
         Context context = getApplicationContext();
@@ -61,7 +61,7 @@ public class AddFriendActivity extends AppCompatActivity {
 
         final SwipeRefreshLayout mSwipeRefreshLayout = findViewById(R.id.swipeRefreshLayoutFriend);
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 User user = SharedPrefHelper.getUserFormSP(getApplication());
@@ -72,6 +72,7 @@ public class AddFriendActivity extends AppCompatActivity {
                     Toast.makeText(AddFriendActivity.this,
                             String.format("INCORRECT INPUT!"), Toast.LENGTH_LONG).show();
                 } else {
+                    submitBtn.setEnabled(false);
                     ApiManager.getInstance().setUserRelation(user, inputEmail.getText().toString().toLowerCase(), new Callback<UserRelation>() {
                         @Override
                         public void onResponse(Call<UserRelation> call, Response<UserRelation> response) {
@@ -87,6 +88,7 @@ public class AddFriendActivity extends AppCompatActivity {
                             }
                             userRelationViewModel.refreshData(getApplication());
                             mSwipeRefreshLayout.setRefreshing(false);
+                            submitBtn.setEnabled(true);
                         }
 
                         @Override
@@ -94,6 +96,7 @@ public class AddFriendActivity extends AppCompatActivity {
                             Log.d("ERROR","Error is " + t.getMessage());
                             userRelationViewModel.refreshData(getApplication());
                             mSwipeRefreshLayout.setRefreshing(false);
+                            submitBtn.setEnabled(true);
                         }
                     });
                 }

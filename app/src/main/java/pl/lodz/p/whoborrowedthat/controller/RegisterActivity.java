@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -52,6 +53,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                 Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
                 if (password.equals(passwordConfirmation) && matcher.matches() && password.length() >= MINIMUM_PASSWORD_LENGTH) {
+                    getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                     ApiManager.getInstance().registerUser(email, password, passwordConfirmation, username, new Callback<User>() {
                         @Override
                         public void onResponse(Call<User> call, Response<User> response) {
@@ -65,9 +68,11 @@ public class RegisterActivity extends AppCompatActivity {
                                 //Save registered user to SP
                                 SharedPrefHelper.storeUserInSharedPrefs(responseUser, getApplication());
                                 onRegisterSuccess();
+
                             } else {
                                 Log.d("ERROR", response.message());
                             }
+                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                         }
 
                         @Override
@@ -75,7 +80,9 @@ public class RegisterActivity extends AppCompatActivity {
                             Toast.makeText(RegisterActivity.this,
                                     "Cannot register!\nPlease try again later."
                                     , Toast.LENGTH_LONG).show();
+                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                         }
+
                     });
                 } else {
                     Toast.makeText(RegisterActivity.this, "Incorrect input data!", Toast.LENGTH_SHORT).show();

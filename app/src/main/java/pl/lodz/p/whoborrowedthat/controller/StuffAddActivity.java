@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -89,18 +90,22 @@ public class StuffAddActivity extends AppBaseActivity {
                 UserSelection selectedUser = (UserSelection) friendsSpinner.getSelectedItem();
                 stuff.getBorrower().setId(selectedUser.getId());
 
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 ApiManager.getInstance().addBorrows(SharedPrefHelper.getUserFormSP(getApplication()), stuff, new Callback<Object>() {
                     @Override
                     public void onResponse(Call<Object> call, Response<Object> response) {
                         Toast.makeText(StuffAddActivity.this,
                                 "Borrow added!"
                                 , Toast.LENGTH_LONG).show();
+                        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                         finish();
                     }
 
                     @Override
                     public void onFailure(Call<Object> call, Throwable t) {
                         Log.d("ERROR", t.getMessage());
+                        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                     }
                 });
             }
