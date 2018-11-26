@@ -15,7 +15,6 @@ import pl.lodz.p.whoborrowedthat.helper.ConstHelper;
 
 public class MainActivity extends AppCompatActivity {
     private Button loginButton;
-    private Button loginGoogleButton;
     private Button registerButton;
 
     @Override
@@ -25,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setElevation(0);
         loginButton = findViewById(R.id.loginButton);
-        loginGoogleButton = findViewById(R.id.loginGoogleButton);
         registerButton = findViewById(R.id.registerButton);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
