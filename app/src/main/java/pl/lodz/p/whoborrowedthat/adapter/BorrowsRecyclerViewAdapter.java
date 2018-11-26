@@ -2,7 +2,6 @@ package pl.lodz.p.whoborrowedthat.adapter;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,11 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import pl.lodz.p.whoborrowedthat.R;
 import pl.lodz.p.whoborrowedthat.controller.BorrowedStuffDetailActivity;
-import pl.lodz.p.whoborrowedthat.controller.LentStuffDetailActivity;
 import pl.lodz.p.whoborrowedthat.helper.SharedPrefHelper;
 import pl.lodz.p.whoborrowedthat.model.Stuff;
 import pl.lodz.p.whoborrowedthat.model.User;
@@ -67,12 +64,12 @@ public class BorrowsRecyclerViewAdapter extends RecyclerView.Adapter<BorrowsRecy
 
                     ApiManager.getInstance().readNotification(user, stuffs.get(position).getId(), new Callback<Object>() {
                         @Override
-                        public void onResponse(Call<Object> call, Response<Object> response) {
+                        public void onResponse(@NonNull Call<Object> call, @NonNull Response<Object> response) {
                             Log.d("RESPONSE", "Remainder sent!");
                         }
 
                         @Override
-                        public void onFailure(Call<Object> call, Throwable t) {
+                        public void onFailure(@NonNull Call<Object> call, @NonNull Throwable t) {
                             Log.d("RESPONSE", "Cannot send a remainder :(");
                         }
                     });
