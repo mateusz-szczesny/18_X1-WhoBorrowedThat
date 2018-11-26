@@ -25,6 +25,6 @@ public class SharedPrefHelper {
 
     public static void removeUserFromSP(Application application) {
         SharedPreferences sharedPref = application.getSharedPreferences(ConstHelper.USER__SP, Context.MODE_PRIVATE);
-        sharedPref.edit().clear().commit();
+        sharedPref.edit().clear().apply();
     }
 }

@@ -4,15 +4,11 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
-import android.util.Log;
-import android.support.v4.widget.SwipeRefreshLayout;
 
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,7 +24,6 @@ import static pl.lodz.p.whoborrowedthat.helper.SharedPrefHelper.getUserFormSP;
 public class BorrowViewModel extends AndroidViewModel {
     private final MutableLiveData<List<Stuff>> allBorrows;
     private final ApiManager apiManager;
-    private List<Stuff> searchBorrows;
     private List<Stuff> allStuffs;
 
     public BorrowViewModel(Application application) {
@@ -73,11 +68,10 @@ public class BorrowViewModel extends AndroidViewModel {
             allBorrows.setValue(allStuffs);
         } else {
             Pattern pattern = Pattern.compile(searchText.toLowerCase());
-            searchBorrows = new ArrayList<>();
+            List<Stuff> searchBorrows = new ArrayList<>();
             for (Stuff stuff : allStuffs) {
                 if (stuff.getName() != null) {
                     Matcher matcher = pattern.matcher(stuff.getName().toLowerCase());
-                    //Log.d("matcher", String.valueOf(matcher.find()));
                     if(matcher.find()) {
                         searchBorrows.add(stuff);
                     }

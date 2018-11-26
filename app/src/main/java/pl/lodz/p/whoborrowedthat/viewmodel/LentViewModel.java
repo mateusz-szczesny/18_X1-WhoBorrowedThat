@@ -5,8 +5,6 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.text.Layout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +23,6 @@ import static pl.lodz.p.whoborrowedthat.helper.SharedPrefHelper.getUserFormSP;
 public class LentViewModel extends AndroidViewModel {
     private final MutableLiveData<List<Stuff>> allLents;
     private final ApiManager apiManager;
-    private List<Stuff> searchLents;
     private List<Stuff> allStuffs;
 
     public LentViewModel(Application application) {
@@ -70,11 +67,10 @@ public class LentViewModel extends AndroidViewModel {
             allLents.setValue(allStuffs);
         } else {
             Pattern pattern = Pattern.compile(searchText.toLowerCase());
-            searchLents = new ArrayList<>();
+            List<Stuff> searchLents = new ArrayList<>();
             for (Stuff stuff : allStuffs) {
                 if (stuff.getName() != null) {
                     Matcher matcher = pattern.matcher(stuff.getName().toLowerCase());
-                    //Log.d("matcher", String.valueOf(matcher.find()));
                     if(matcher.find()) {
                         searchLents.add(stuff);
                     }

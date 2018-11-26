@@ -2,11 +2,6 @@ package pl.lodz.p.whoborrowedthat.adapter;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.ViewModel;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -20,11 +15,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import pl.lodz.p.whoborrowedthat.R;
-import pl.lodz.p.whoborrowedthat.controller.BorrowedStuffDetailActivity;
-import pl.lodz.p.whoborrowedthat.controller.LoginActivity;
-import pl.lodz.p.whoborrowedthat.controller.StuffAddActivity;
 import pl.lodz.p.whoborrowedthat.helper.SharedPrefHelper;
-import pl.lodz.p.whoborrowedthat.model.Stuff;
 import pl.lodz.p.whoborrowedthat.model.User;
 import pl.lodz.p.whoborrowedthat.model.UserRelation;
 import pl.lodz.p.whoborrowedthat.service.ApiManager;
@@ -33,14 +24,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static pl.lodz.p.whoborrowedthat.helper.ConstHelper.STUFF_BUNDLE__KEY;
 
 public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecyclerViewAdapter.ViewHolder> {
 
     private final LayoutInflater inflater;
     private List<UserRelation> friends;
     private Application application;
-    UserRelationViewModel userRelationViewModel;
+    private UserRelationViewModel userRelationViewModel;
 
     public FriendsRecyclerViewAdapter(Application application) {
         this.application = application;
@@ -87,7 +77,7 @@ public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecy
 
                     ApiManager.getInstance().removeUserRelation(user, friends.get(position).getId(), new Callback<Void>() {
                         @Override
-                        public void onResponse(Call<Void> call, Response<Void> response) {
+                        public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                             if (response.isSuccessful()) {
                                 Toast.makeText(application.getApplicationContext(),
                                         "Fried removed!",
@@ -97,7 +87,7 @@ public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecy
                         }
 
                         @Override
-                        public void onFailure(Call<Void> call, Throwable t) {
+                        public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
                             Log.d("RESPONSE", "Cannot send a remainder :(");
                         }
                     });
