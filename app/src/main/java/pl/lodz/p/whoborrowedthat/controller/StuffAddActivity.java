@@ -6,9 +6,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,7 +32,6 @@ import pl.lodz.p.whoborrowedthat.model.Stuff;
 import pl.lodz.p.whoborrowedthat.model.User;
 import pl.lodz.p.whoborrowedthat.model.UserRelation;
 import pl.lodz.p.whoborrowedthat.service.ApiManager;
-import pl.lodz.p.whoborrowedthat.viewmodel.BorrowViewModel;
 import pl.lodz.p.whoborrowedthat.viewmodel.UserRelationViewModel;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -65,7 +64,7 @@ public class StuffAddActivity extends AppBaseActivity {
         nameEditText = findViewById(R.id.nameEditText);
         friendsSpinner = findViewById(R.id.friendsSpinner);
 
-        final List<UserSelection> list = new ArrayList<UserSelection>();
+        final List<UserSelection> list = new ArrayList<>();
 
         UserRelationViewModel userRelationViewModel = ViewModelProviders.of(this).get(UserRelationViewModel.class);
         userRelationViewModel.getRelations().observe(this, new Observer<List<UserRelation>>() {
@@ -101,7 +100,7 @@ public class StuffAddActivity extends AppBaseActivity {
                         WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 ApiManager.getInstance().addBorrows(SharedPrefHelper.getUserFormSP(getApplication()), stuff, new Callback<Object>() {
                     @Override
-                    public void onResponse(Call<Object> call, Response<Object> response) {
+                    public void onResponse(@NonNull Call<Object> call, @NonNull Response<Object> response) {
                         Toast.makeText(StuffAddActivity.this,
                                 "Borrow added!"
                                 , Toast.LENGTH_LONG).show();
@@ -110,7 +109,7 @@ public class StuffAddActivity extends AppBaseActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<Object> call, Throwable t) {
+                    public void onFailure(@NonNull Call<Object> call, @NonNull Throwable t) {
                         Log.d("ERROR", t.getMessage());
                         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                     }
@@ -156,17 +155,18 @@ public class StuffAddActivity extends AppBaseActivity {
         int id;
         String displayedName;
 
-        public UserSelection(int id, String displayedName) {
+        UserSelection(int id, String displayedName) {
             this.id = id;
             this.displayedName = displayedName;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return displayedName;
         }
 
-        public int getId() {
+        int getId() {
             return id;
         }
 
@@ -187,7 +187,7 @@ public class StuffAddActivity extends AppBaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == this.RESULT_CANCELED) {
+        if (resultCode == RESULT_CANCELED) {
             return;
         }
         if (requestCode == GALLERY) {

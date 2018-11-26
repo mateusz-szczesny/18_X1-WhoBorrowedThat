@@ -9,7 +9,7 @@ import retrofit2.http.Header;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 
-public interface AuthApi {
+interface AuthApi {
     @POST("v1/sessions")
     @FormUrlEncoded
     Call<User> login(

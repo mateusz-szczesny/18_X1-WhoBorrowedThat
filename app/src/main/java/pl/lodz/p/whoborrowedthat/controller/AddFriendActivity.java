@@ -3,6 +3,7 @@ package pl.lodz.p.whoborrowedthat.controller;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -67,15 +68,14 @@ public class AddFriendActivity extends AppCompatActivity {
                 User user = SharedPrefHelper.getUserFormSP(getApplication());
                 String inputData = String.valueOf(inputEmail.getText());
                 Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(inputData);
-                matcher.find();
                 if ("".equals(inputData) || !matcher.matches()){
                     Toast.makeText(AddFriendActivity.this,
-                            String.format("INCORRECT INPUT!"), Toast.LENGTH_LONG).show();
+                            "INCORRECT INPUT!", Toast.LENGTH_LONG).show();
                 } else {
                     submitBtn.setEnabled(false);
                     ApiManager.getInstance().setUserRelation(user, inputEmail.getText().toString().toLowerCase(), new Callback<UserRelation>() {
                         @Override
-                        public void onResponse(Call<UserRelation> call, Response<UserRelation> response) {
+                        public void onResponse(@NonNull Call<UserRelation> call, @NonNull Response<UserRelation> response) {
                             UserRelation responseUserRelation = response.body();
                             if (response.isSuccessful() && responseUserRelation != null) {
                                 Toast.makeText(AddFriendActivity.this,
@@ -92,7 +92,7 @@ public class AddFriendActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFailure(Call<UserRelation> call, Throwable t) {
+                        public void onFailure(@NonNull Call<UserRelation> call, @NonNull Throwable t) {
                             Log.d("ERROR","Error is " + t.getMessage());
                             userRelationViewModel.refreshData(getApplication());
                             mSwipeRefreshLayout.setRefreshing(false);

@@ -8,7 +8,7 @@ import okhttp3.ResponseBody;
 import pl.lodz.p.whoborrowedthat.model.Data;
 import retrofit2.Converter;
 
-public class CustomConverter<T> implements Converter<ResponseBody, T> {
+class CustomConverter<T> implements Converter<ResponseBody, T> {
     private final Converter<ResponseBody, Data<T>> delegate;
 
     CustomConverter(Converter<ResponseBody, Data<T>> delegate) {

@@ -1,5 +1,6 @@
 package pl.lodz.p.whoborrowedthat.controller;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -19,10 +20,11 @@ import pl.lodz.p.whoborrowedthat.R;
 import pl.lodz.p.whoborrowedthat.helper.SharedPrefHelper;
 import pl.lodz.p.whoborrowedthat.model.User;
 
-public abstract class AppBaseActivity extends AppCompatActivity implements MenuItem.OnMenuItemClickListener {
+public class AppBaseActivity extends AppCompatActivity implements MenuItem.OnMenuItemClickListener {
     private FrameLayout view_stub;
     private TextView header;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,7 +96,8 @@ public abstract class AppBaseActivity extends AppCompatActivity implements MenuI
         return false;
     }
 
-    protected void updateUserDetails(){
+    @SuppressLint("SetTextI18n")
+    void updateUserDetails(){
         User user = SharedPrefHelper.getUserFormSP(getApplication());
         header.setText("Welcome " + user.getUsername() + "!");
     }

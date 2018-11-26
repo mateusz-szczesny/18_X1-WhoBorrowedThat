@@ -37,14 +37,14 @@ public class LoginActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
         getSupportActionBar().setElevation(0);
         final EditText emailText = findViewById(R.id.editTextEmail);
-        final EditText passowrdText = findViewById(R.id.editTextPassword);
+        final EditText passwordText = findViewById(R.id.editTextPassword);
         Button loginButton = findViewById(R.id.buttonSignIn);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String email = emailText.getText().toString();
-                String password = passowrdText.getText().toString();
+                String password = passwordText.getText().toString();
                 Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
                 if (password.length() < MINIMUM_PASSWORD_LENGTH  || !matcher.matches()) {
                     Toast.makeText(LoginActivity.this,
