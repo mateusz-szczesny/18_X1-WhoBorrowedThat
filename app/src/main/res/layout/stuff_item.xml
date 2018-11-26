@@ -14,34 +14,35 @@
         android:layout_margin="@dimen/text_margin"
         android:background="#333333"
         android:gravity="left|center_vertical"
-        android:paddingLeft="@android:dimen/app_icon_size"
+        android:paddingStart="@android:dimen/app_icon_size"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         android:textColor="@android:color/white"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="SAMPLE_CONTENT" />
+        tools:text="SAMPLE_CONTENT"
+        tools:ignore="RtlHardcoded,RtlSymmetry" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/datesLeft"
         android:layout_width="wrap_content"
         android:layout_height="21dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/roboto_light"
-        android:text="days left"
+        android:text="@string/days_left"
         android:textColor="@android:color/white"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/daysleft"
+        app:layout_constraintStart_toEndOf="@+id/numberOfDaysLeft"
         app:layout_constraintTop_toBottomOf="@+id/content"
         app:layout_constraintVertical_bias="0.932" />
 
     <TextView
-        android:id="@+id/daysleft"
+        android:id="@+id/numberOfDaysLeft"
         android:layout_width="87dp"
         android:layout_height="21dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/roboto_light"
-        android:text="how many"
+        android:text="@string/how_many"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -57,5 +58,6 @@
         android:src="@mipmap/ic_notification"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/todo" />
 </android.support.constraint.ConstraintLayout>

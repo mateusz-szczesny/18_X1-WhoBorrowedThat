@@ -16,7 +16,7 @@
         android:background="@color/colorAccent"
         android:fontFamily="@font/roboto_light"
         android:onClick="showDatePickerDialogForRentalDate"
-        android:text="pick a date"
+        android:text="@string/pick_a_date"
         android:textAllCaps="false"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="@+id/friendsSpinner"
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto_light"
-        android:text="show date"
+        android:text="@string/show_date"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="@+id/button"
         app:layout_constraintHorizontal_bias="0.0"
@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:text="rental date"
+        android:text="@string/rental_date"
         android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="@+id/friendsSpinner"
         app:layout_constraintTop_toBottomOf="@+id/friendsSpinner" />
@@ -56,7 +56,7 @@
         android:background="@color/colorAccent"
         android:fontFamily="@font/roboto_light"
         android:onClick="showDatePickerDialogForReturnDate"
-        android:text="pick a date"
+        android:text="@string/pick_a_date"
         android:textAllCaps="false"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="@+id/rentalDateTextView"
@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto_light"
-        android:text="show date"
+        android:text="@string/show_date"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="@+id/returnDatePickerButton"
         app:layout_constraintHorizontal_bias="0.0"
@@ -83,7 +83,7 @@
         android:layout_width="75dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="return date"
+        android:text="@string/return_date"
         android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="@+id/rentalDateTextView"
         app:layout_constraintTop_toBottomOf="@+id/rentalDateTextView" />
@@ -95,7 +95,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="44dp"
         android:layout_marginEnd="8dp"
-        android:text="item"
+        android:text="@string/item"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.139"
@@ -112,7 +112,8 @@
         android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="@+id/name"
         app:layout_constraintTop_toBottomOf="@+id/name"
-        tools:text="item name" />
+        tools:text="item name"
+        tools:ignore="Autofill,LabelFor" />
 
     <Spinner
         android:id="@+id/friendsSpinner"
@@ -126,7 +127,8 @@
         app:layout_constraintEnd_toEndOf="@+id/fromGalleryButton"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        tools:ignore="UnusedAttribute" />
 
     <Button
         android:id="@+id/addButton"
@@ -138,7 +140,7 @@
         android:layout_marginBottom="8dp"
         android:background="@color/colorAccent"
         android:fontFamily="@font/roboto_light"
-        android:text="ADD NEW RENTTAL"
+        android:text="@string/add_new_rental"
         android:textAllCaps="false"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -156,7 +158,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/roboto_light"
-        android:text="ADD NEW ITEM"
+        android:text="@string/add_new_item"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -169,7 +171,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="lent to"
+        android:text="@string/lent_to"
         android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="@+id/makePhotoButton"
         app:layout_constraintTop_toBottomOf="@+id/makePhotoButton" />
@@ -182,7 +184,7 @@
         android:layout_marginEnd="8dp"
         android:background="@color/colorAccent"
         android:fontFamily="@font/roboto_light"
-        android:text="make photo"
+        android:text="@string/make_photo"
         android:textAllCaps="false"
         app:layout_constraintEnd_toStartOf="@+id/fromGalleryButton"
         app:layout_constraintHorizontal_bias="0.0"
@@ -196,7 +198,7 @@
         android:layout_marginTop="12dp"
         android:background="@color/colorAccent"
         android:fontFamily="@font/roboto_light"
-        android:text="from gallery"
+        android:text="@string/from_gallery"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="@+id/nameEditText"
         app:layout_constraintTop_toBottomOf="@+id/nameEditText" />

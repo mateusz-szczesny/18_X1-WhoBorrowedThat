@@ -13,14 +13,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="top"
-        android:text="Who Borrowed That?"
+        android:text="@string/who_borrowed_that_lower"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
     <TextView
         android:id="@+id/USER_NAME"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="TITLE_HERE"
         android:gravity="bottom"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
