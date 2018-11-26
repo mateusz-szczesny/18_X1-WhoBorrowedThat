@@ -43,5 +43,19 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(intent);
             }
         });
+
+        isUserAlreadyLoggedIn();
+    }
+
+    private void isUserAlreadyLoggedIn() {
+        SharedPreferences sharedPref = getSharedPreferences(ConstHelper.USER__SP, Context.MODE_PRIVATE);
+        if (sharedPref.getBoolean(ConstHelper.USER_LOGIN_STATUS__SP, false)){
+            onLogInSuccess();
+        }
+    }
+
+    private void onLogInSuccess() {
+        Intent intent = new Intent(MainActivity.this, BorrowLentListActivity.class);
+        MainActivity.this.startActivity(intent);
     }
 }
