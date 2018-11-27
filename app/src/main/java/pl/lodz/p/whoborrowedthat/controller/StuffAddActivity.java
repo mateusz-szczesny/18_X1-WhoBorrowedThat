@@ -71,13 +71,16 @@ public class StuffAddActivity extends AppBaseActivity {
             @Override
             public void onChanged(@Nullable List<UserRelation> relations) {
                 User user = SharedPrefHelper.getUserFormSP(getApplication());
-                for(UserRelation ur : relations) {
-                    User relatedUser;
-                    relatedUser = ur.getRelatedUser();
-                    if (user.getId() == relatedUser.getId()) {
-                        relatedUser = ur.getRelatingUser();
+
+                if (relations != null) {
+                    for(UserRelation ur : relations) {
+                        User relatedUser;
+                        relatedUser = ur.getRelatedUser();
+                        if (user.getId() == relatedUser.getId()) {
+                            relatedUser = ur.getRelatingUser();
+                        }
+                        list.add(new UserSelection((int)relatedUser.getId(), relatedUser.getUsername()));
                     }
-                    list.add(new UserSelection((int)relatedUser.getId(), relatedUser.getUsername()));
                 }
                 ArrayAdapter<UserSelection> dataAdapter = new ArrayAdapter<UserSelection>(getApplicationContext(),
                         R.layout.spinner_item, list);
