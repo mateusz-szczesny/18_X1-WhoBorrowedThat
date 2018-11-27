@@ -170,6 +170,6 @@ public class LentStuffDetailActivity extends AppBaseActivity {
         returnItemBtn.setBackgroundColor(Color.RED);
         returnItemBtn.setText("Already returned :)");
         returnDateTitle.setText("Returned on");
-        returnDate.setText(dateFormat.format(stuff.getReturnDate()));
+        returnDate.setText(dateFormat.format(new Date()));
     }
 }
