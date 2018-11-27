@@ -3,6 +3,7 @@ package pl.lodz.p.whoborrowedthat.adapter;
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -54,11 +55,21 @@ public class BorrowsRecyclerViewAdapter extends RecyclerView.Adapter<BorrowsRecy
     public void onBindViewHolder(@NonNull BorrowsRecyclerViewAdapter.ViewHolder holder, final int position) {
         if (stuffs != null) {
             final Stuff current = stuffs.get(position);
-            holder.content.setText(current.getName());
-            Date now = new Date();
-            Date returnDate = current.getEstimatedReturnDate();
-            Date diff = new Date(returnDate.getTime() - now.getTime());
-            holder.daysLeft.setText(String.valueOf(diff.getTime() / (24 * 3600000)));
+
+            if (current.getReturnDate() == null) {
+                holder.content.setText(current.getName());
+                Date now = new Date();
+                Date returnDate = current.getEstimatedReturnDate();
+                Date diff = new Date(returnDate.getTime() - now.getTime());
+                holder.daysLeft.setText(String.valueOf(diff.getTime() / (24 * 3600000)));
+            } else {
+                holder.daysLeft.setText("");
+                holder.daysLeftTitle.setText("");
+                holder.content.setText(current.getName());
+                holder.content.setPaintFlags(holder.content.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            }
+
+
 
             if (current.getNotified()) {
                 holder.notification.setVisibility(View.VISIBLE);
@@ -111,12 +122,14 @@ public class BorrowsRecyclerViewAdapter extends RecyclerView.Adapter<BorrowsRecy
         private final TextView content;
         private final ImageView notification;
         private final TextView daysLeft;
+        private final TextView daysLeftTitle;
 
         private ViewHolder(View itemView) {
             super(itemView);
             content = itemView.findViewById(R.id.content);
             notification = itemView.findViewById(R.id.notification);
             daysLeft = itemView.findViewById(R.id.numberOfDaysLeft);
+            daysLeftTitle = itemView.findViewById(R.id.daysLeftTitle);
         }
     }
 }

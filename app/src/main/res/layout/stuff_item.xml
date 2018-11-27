@@ -24,7 +24,7 @@
         tools:ignore="RtlHardcoded,RtlSymmetry" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/daysLeftTitle"
         android:layout_width="wrap_content"
         android:layout_height="21dp"
         android:layout_marginStart="8dp"
