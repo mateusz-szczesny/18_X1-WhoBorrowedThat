@@ -11,6 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 import pl.lodz.p.whoborrowedthat.R;
@@ -23,9 +28,11 @@ public class LentRecyclerViewAdapter extends RecyclerView.Adapter<LentRecyclerVi
 
     private final LayoutInflater inflater;
     private List<Stuff> stuffs;
+    private SimpleDateFormat format;
 
     public LentRecyclerViewAdapter(Application application) {
         inflater = LayoutInflater.from(application.getApplicationContext());
+        format = new SimpleDateFormat("yyyy-MM-dd");
     }
 
     @NonNull
@@ -40,7 +47,10 @@ public class LentRecyclerViewAdapter extends RecyclerView.Adapter<LentRecyclerVi
     public void onBindViewHolder(@NonNull LentRecyclerViewAdapter.ViewHolder holder, final int position) {
         if (stuffs != null) {
             final Stuff current = stuffs.get(position);
-            //TODO: set specific data for one item after layout specified
+            Date now = new Date();
+            Date returnDate = current.getEstimatedReturnDate();
+            Date diff = new Date(returnDate.getTime() - now.getTime());
+            holder.daysLeft.setText(String.valueOf(diff.getTime() / (24 * 3600000)));
 
             holder.content.setText(current.getName());
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -72,10 +82,13 @@ public class LentRecyclerViewAdapter extends RecyclerView.Adapter<LentRecyclerVi
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView content;
+        private final TextView daysLeft;
+
 
         private ViewHolder(View itemView) {
             super(itemView);
             content = itemView.findViewById(R.id.content);
+            daysLeft = itemView.findViewById(R.id.numberOfDaysLeft);
         }
     }
 }

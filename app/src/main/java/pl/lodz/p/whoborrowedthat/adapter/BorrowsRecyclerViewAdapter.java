@@ -23,6 +23,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.util.Date;
 import java.util.List;
 
 import static pl.lodz.p.whoborrowedthat.helper.ConstHelper.STUFF_BUNDLE__KEY;
@@ -36,6 +39,7 @@ public class BorrowsRecyclerViewAdapter extends RecyclerView.Adapter<BorrowsRecy
     public BorrowsRecyclerViewAdapter(Application application) {
         this.application = application;
         inflater = LayoutInflater.from(application.getApplicationContext());
+
     }
 
     @NonNull
@@ -51,6 +55,11 @@ public class BorrowsRecyclerViewAdapter extends RecyclerView.Adapter<BorrowsRecy
         if (stuffs != null) {
             final Stuff current = stuffs.get(position);
             holder.content.setText(current.getName());
+            Date now = new Date();
+            Date returnDate = current.getEstimatedReturnDate();
+            Date diff = new Date(returnDate.getTime() - now.getTime());
+            holder.daysLeft.setText(String.valueOf(diff.getTime() / (24 * 3600000)));
+
             if (current.getNotified()) {
                 holder.notification.setVisibility(View.VISIBLE);
             } else {
@@ -101,11 +110,13 @@ public class BorrowsRecyclerViewAdapter extends RecyclerView.Adapter<BorrowsRecy
     class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView content;
         private final ImageView notification;
+        private final TextView daysLeft;
 
         private ViewHolder(View itemView) {
             super(itemView);
             content = itemView.findViewById(R.id.content);
             notification = itemView.findViewById(R.id.notification);
+            daysLeft = itemView.findViewById(R.id.numberOfDaysLeft);
         }
     }
 }

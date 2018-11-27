@@ -24,27 +24,29 @@
         tools:ignore="RtlHardcoded,RtlSymmetry" />
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="21dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
         android:fontFamily="@font/roboto_light"
         android:text="@string/days_left"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/numberOfDaysLeft"
-        app:layout_constraintTop_toBottomOf="@+id/content"
-        app:layout_constraintVertical_bias="0.932" />
+        app:layout_constraintTop_toBottomOf="@+id/content" />
 
     <TextView
         android:id="@+id/numberOfDaysLeft"
-        android:layout_width="87dp"
+        android:layout_width="wrap_content"
         android:layout_height="21dp"
         android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
         android:fontFamily="@font/roboto_light"
         android:text="@string/how_many"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView2"
         app:layout_constraintStart_toStartOf="@+id/content"
         app:layout_constraintTop_toBottomOf="@+id/content" />
 
