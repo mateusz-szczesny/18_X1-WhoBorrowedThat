@@ -1,14 +1,24 @@
 package pl.lodz.p.whoborrowedthat.controller;
 
+import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import pl.lodz.p.whoborrowedthat.R;
 import pl.lodz.p.whoborrowedthat.features.DatePickerFragment;
@@ -74,23 +84,7 @@ public class LentStuffDetailActivity extends AppBaseActivity {
         changeDateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDatePickerDialogForReturnDate(v);
-                User currentUser = SharedPrefHelper.getUserFormSP(getApplication());
-                ApiManager.getInstance().changeEstimatedReturnDate(currentUser, stuff.getId(), stuff.getEstimatedReturnDate(), new Callback<Void>() {
-                    @Override
-                    public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-                        Toast.makeText(LentStuffDetailActivity.this,
-                                "Date will be changed!"
-                                , Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
-                        Toast.makeText(LentStuffDetailActivity.this,
-                                "Cannot change the date :("
-                                , Toast.LENGTH_LONG).show();
-                    }
-                });
+                showDatePickerDialogForReturnDate();
             }
         });
 
@@ -106,9 +100,44 @@ public class LentStuffDetailActivity extends AppBaseActivity {
         }
     }
 
-    public void showDatePickerDialogForReturnDate(View v) {
-        DialogFragment newFragment = new DatePickerFragment();
-        ((DatePickerFragment)newFragment).setFragmentSetup(null, stuff.getEstimatedReturnDate());
-        newFragment.show(getSupportFragmentManager(), "datePicker");
+    public void showDatePickerDialogForReturnDate() {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog newFragment = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+                        String date = day + "-" + month + "-" + year;
+                        try {
+                            callForNewDate(formatter.parse(date));
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, year, month, dayOfMonth);
+        newFragment.show();
+    }
+
+    public void callForNewDate(Date date) {
+        User currentUser = SharedPrefHelper.getUserFormSP(getApplication());
+        ApiManager.getInstance().changeEstimatedReturnDate(currentUser, stuff.getId(), date, new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                Toast.makeText(LentStuffDetailActivity.this,
+                        "Date will be changed!"
+                        , Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(LentStuffDetailActivity.this,
+                        "Cannot change the date :("
+                        , Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
