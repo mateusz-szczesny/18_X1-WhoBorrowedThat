@@ -1,18 +1,15 @@
 package pl.lodz.p.whoborrowedthat.service;
 
-import com.squareup.moshi.Json;
 
 import pl.lodz.p.whoborrowedthat.model.User;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
 
-public interface AuthApi {
+interface AuthApi {
     @POST("v1/sessions")
     @FormUrlEncoded
     Call<User> login(

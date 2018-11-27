@@ -13,9 +13,8 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.logging.Logger;
+import java.util.Objects;
 
-import pl.lodz.p.whoborrowedthat.model.Stuff;
 
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
     private TextView dateTextView;
@@ -27,7 +26,6 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         super.onCreate(savedInstanceState);
 
         format = new SimpleDateFormat("dd.MM.YYYY", getResources().getConfiguration().locale);
-        date = new Date();
     }
 
     @NonNull
@@ -40,7 +38,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
 
-        return new DatePickerDialog(getActivity(), this, year, month, day);
+        return new DatePickerDialog(Objects.requireNonNull(getActivity()), this, year, month, day);
     }
 
     @Override

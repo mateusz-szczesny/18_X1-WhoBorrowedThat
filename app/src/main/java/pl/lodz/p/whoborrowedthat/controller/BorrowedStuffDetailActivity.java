@@ -1,21 +1,12 @@
 package pl.lodz.p.whoborrowedthat.controller;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 
 import pl.lodz.p.whoborrowedthat.R;
-import pl.lodz.p.whoborrowedthat.helper.SharedPrefHelper;
 import pl.lodz.p.whoborrowedthat.model.Stuff;
-import pl.lodz.p.whoborrowedthat.model.User;
-import pl.lodz.p.whoborrowedthat.service.ApiManager;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import static pl.lodz.p.whoborrowedthat.helper.ConstHelper.STUFF_BUNDLE__KEY;
 
@@ -50,11 +41,10 @@ public class BorrowedStuffDetailActivity extends AppBaseActivity {
             itemName.setText(stuff.getName());
             borrowDate.setText(dateFormat.format(stuff.getRentalDate()));
             returnDate.setText(dateFormat.format(stuff.getEstimatedReturnDate()));
-            StringBuilder ownerNameStringBuilder = new StringBuilder();
-            ownerNameStringBuilder.append(stuff.getOwner().getFirstName());
-            ownerNameStringBuilder.append(" ");
-            ownerNameStringBuilder.append(stuff.getOwner().getLastName());
-            ownerName.setText(ownerNameStringBuilder.toString());
+            String ownerNameStringBuilder = stuff.getOwner().getFirstName() +
+                    " " +
+                    stuff.getOwner().getLastName();
+            ownerName.setText(ownerNameStringBuilder);
         }
     }
 }

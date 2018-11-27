@@ -3,15 +3,13 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/settings"
-            android:title="SETTINGS" />
+            android:title="@string/settings" />
         <item
             android:id="@+id/friends"
-            android:title="MY FRIENDS" />
-        <item
-            android:id="@+id/blank"
-            android:title="" />
+            android:title="@string/my_friends" />
+        <item android:title="" />
         <item
             android:id="@+id/logout"
-            android:title="LOGOUT" />
+            android:title="@string/logout" />
     </group>
 </menu>

@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="pl.lodz.p.whoborrowedthat">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning"
+        android:fullBackupContent="@xml/backup_descriptor">
         <activity
             android:name=".controller.LoginActivity"
             android:screenOrientation="portrait" />
@@ -40,9 +42,10 @@
         <activity android:name=".controller.BorrowedStuffDetailActivity" />
         <activity android:name=".controller.LentStuffDetailActivity" />
         <activity android:name=".controller.StuffAddActivity" />
-        <activity android:name=".controller.AppBaseActivity" />
+        <activity android:name=".controller.AppBaseActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".controller.SettingsActivity" />
-        <activity android:name=".controller.AddFriendActivity"></activity>
+        <activity android:name=".controller.AddFriendActivity" />
     </application>
 
 </manifest>

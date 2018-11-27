@@ -2,7 +2,6 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_sign_up"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
@@ -29,48 +28,52 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_light"
-            android:hint="username"
+            android:hint="@string/username"
             android:inputType="text"
             android:textColor="@android:color/white"
             android:textColorHighlight="@android:color/white"
             android:textColorHint="@android:color/white"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            tools:ignore="Autofill" />
 
         <EditText
             android:id="@+id/editTextEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_light"
-            android:hint="email addres"
+            android:hint="@string/email_address"
             android:inputType="textEmailAddress"
             android:textColor="@android:color/white"
             android:textColorHighlight="@android:color/white"
             android:textColorHint="@android:color/white"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            tools:ignore="Autofill" />
 
         <EditText
             android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_light"
-            android:hint="password"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:textColor="@android:color/white"
             android:textColorHighlight="@android:color/white"
             android:textColorHint="@android:color/white"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            tools:ignore="Autofill" />
 
         <EditText
             android:id="@+id/editTextPasswordConfirmation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_light"
-            android:hint="password confirmation"
+            android:hint="@string/password_confirmation"
             android:inputType="textPassword"
             android:textColor="@android:color/white"
             android:textColorHighlight="@android:color/white"
             android:textColorHint="@android:color/white"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            tools:ignore="Autofill" />
 
 
     </LinearLayout>
@@ -83,7 +86,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Sign up"
+        android:text="@string/sign_up"
         android:textColor="@android:color/white"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -101,36 +104,17 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/colorAccent"
         android:fontFamily="@font/roboto_light"
-        android:text="Sign Up"
+        android:text="@string/sign_up_value"
         android:textColor="@android:color/black"
         android:textColorHighlight="@android:color/white"
         android:textColorHint="@android:color/white"
         android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
-    <Button
-        android:id="@+id/buttonSignIn2"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="300dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="8dp"
-        android:background="@android:color/white"
-        android:fontFamily="@font/roboto_light"
-        android:text="Sign up with Google"
-        android:textAllCaps="false"
-        android:textColor="@android:color/black"
-        android:textColorHighlight="@android:color/white"
-        android:textColorHint="@android:color/white"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSignUp" />
 
 </android.support.constraint.ConstraintLayout>

@@ -1,12 +1,13 @@
 package pl.lodz.p.whoborrowedthat.service;
 
+import android.annotation.SuppressLint;
+
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import pl.lodz.p.whoborrowedthat.coverter.CustomConverterFactory;
-import pl.lodz.p.whoborrowedthat.helper.SharedPrefHelper;
 import pl.lodz.p.whoborrowedthat.model.Stuff;
 import pl.lodz.p.whoborrowedthat.model.User;
 import pl.lodz.p.whoborrowedthat.model.UserRelation;
@@ -20,7 +21,7 @@ public class ApiManager {
     private static DataApi dataService;
     private static ApiManager apiManager;
 
-    public enum StuffType { BORROWED, LENT };
+    public enum StuffType { BORROWED, LENT }
 
     private ApiManager() {
 
@@ -90,10 +91,10 @@ public class ApiManager {
     }
 
     public void addBorrows(User user, Stuff stuff, Callback<Object> callback) {
-        SimpleDateFormat a  = new SimpleDateFormat("dd-MM-YYYY");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat a  = new SimpleDateFormat("dd-MM-YYYY");
         Call<Object> userCall = dataService.addBorrows(user.getToken(), user.getEmail(),
                 String.valueOf(user.getId()), String.valueOf(stuff.getBorrower().getId()),
-                stuff.getName(),a.format(stuff.getRentalDate()), a.format(stuff.getReturnDate()));
+                stuff.getName(),a.format(stuff.getRentalDate()), a.format(stuff.getEstimatedReturnDate()));
         userCall.enqueue(callback);
     }
 

@@ -1,6 +1,7 @@
 package pl.lodz.p.whoborrowedthat.controller;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -57,7 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
                             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                     ApiManager.getInstance().registerUser(email, password, passwordConfirmation, username, new Callback<User>() {
                         @Override
-                        public void onResponse(Call<User> call, Response<User> response) {
+                        public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                             User responseUser = response.body();
                             if (response.isSuccessful() && responseUser != null) {
                                 Toast.makeText(RegisterActivity.this,
@@ -76,7 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFailure(Call<User> call, Throwable t) {
+                        public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
                             Toast.makeText(RegisterActivity.this,
                                     "Cannot register!\nPlease try again later."
                                     , Toast.LENGTH_LONG).show();

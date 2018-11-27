@@ -1,7 +1,7 @@
 package pl.lodz.p.whoborrowedthat.controller;
 
-import android.app.SharedElementCallback;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -40,7 +40,7 @@ public class SettingsActivity extends AppBaseActivity {
                     updateButton.setEnabled(false);
                     ApiManager.getInstance().updateUsername(SharedPrefHelper.getUserFormSP(getApplication()), username, new Callback<Void>() {
                         @Override
-                        public void onResponse(Call<Void> call, Response<Void> response) {
+                        public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                             Toast.makeText(SettingsActivity.this,
                                     "Username updated"
                                     , Toast.LENGTH_LONG).show();
@@ -53,7 +53,7 @@ public class SettingsActivity extends AppBaseActivity {
                         }
 
                         @Override
-                        public void onFailure(Call<Void> call, Throwable t) {
+                        public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
                             Toast.makeText(SettingsActivity.this,
                                     "Something went wrong"
                                     , Toast.LENGTH_LONG).show();

@@ -1,7 +1,6 @@
 package pl.lodz.p.whoborrowedthat.controller;
 
 import android.support.design.widget.TabLayout;
-import android.support.v7.app.AppCompatActivity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import pl.lodz.p.whoborrowedthat.R;
 import pl.lodz.p.whoborrowedthat.command.SearchCommand;
@@ -20,7 +20,7 @@ public class BorrowLentListActivity extends AppBaseActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     private ViewPager mViewPager;
-    private Button searchButton;
+    private ImageButton searchButton;
     private EditText searchText;
 
 
@@ -57,7 +57,7 @@ public class BorrowLentListActivity extends AppBaseActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
     }
 
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         SectionsPagerAdapter(FragmentManager fm) {
             super(fm);

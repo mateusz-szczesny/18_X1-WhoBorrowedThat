@@ -1,6 +1,6 @@
 package pl.lodz.p.whoborrowedthat.controller;
 
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -51,14 +51,14 @@ public class LentStuffDetailActivity extends AppBaseActivity {
                 User currentUser = SharedPrefHelper.getUserFormSP(getApplication());
                 ApiManager.getInstance().notifyBorrow(currentUser, stuff.getId(), new Callback<Object>() {
                     @Override
-                    public void onResponse(Call<Object> call, Response<Object> response) {
+                    public void onResponse(@NonNull Call<Object> call, @NonNull Response<Object> response) {
                         Toast.makeText(LentStuffDetailActivity.this,
                                 "Remainder sent!"
                                 , Toast.LENGTH_LONG).show();
                     }
 
                     @Override
-                    public void onFailure(Call<Object> call, Throwable t) {
+                    public void onFailure(@NonNull Call<Object> call, @NonNull Throwable t) {
                         Toast.makeText(LentStuffDetailActivity.this,
                                 "Cannot send a remainder :("
                                 , Toast.LENGTH_LONG).show();
@@ -72,11 +72,10 @@ public class LentStuffDetailActivity extends AppBaseActivity {
             itemName.setText(stuff.getName());
             borrowDate.setText(dateFormat.format(stuff.getRentalDate()));
             returnDate.setText(dateFormat.format(stuff.getEstimatedReturnDate()));
-            StringBuilder ownerNameStringBuilder = new StringBuilder();
-            ownerNameStringBuilder.append(stuff.getBorrower().getFirstName());
-            ownerNameStringBuilder.append(" ");
-            ownerNameStringBuilder.append(stuff.getBorrower().getLastName());
-            borrowerName.setText(ownerNameStringBuilder.toString());
+            String ownerNameStringBuilder = stuff.getBorrower().getFirstName() +
+                    " " +
+                    stuff.getBorrower().getLastName();
+            borrowerName.setText(ownerNameStringBuilder);
         }
     }
 }

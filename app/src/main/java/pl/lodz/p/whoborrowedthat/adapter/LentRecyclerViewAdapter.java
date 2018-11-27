@@ -2,7 +2,6 @@ package pl.lodz.p.whoborrowedthat.adapter;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -24,10 +23,8 @@ public class LentRecyclerViewAdapter extends RecyclerView.Adapter<LentRecyclerVi
 
     private final LayoutInflater inflater;
     private List<Stuff> stuffs;
-    private Application application;
 
     public LentRecyclerViewAdapter(Application application) {
-        this.application = application;
         inflater = LayoutInflater.from(application.getApplicationContext());
     }
 
@@ -73,7 +70,6 @@ public class LentRecyclerViewAdapter extends RecyclerView.Adapter<LentRecyclerVi
         else return 0;
     }
 
-    //TODO: set specific data for one item after layout specified
     class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView content;
 
