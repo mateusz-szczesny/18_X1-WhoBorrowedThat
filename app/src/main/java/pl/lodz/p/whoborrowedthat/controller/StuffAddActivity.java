@@ -154,7 +154,7 @@ public class StuffAddActivity extends AppBaseActivity {
 
     public void showDatePickerDialogForReturnDate(View v) {
         DialogFragment newFragment = new DatePickerFragment();
-        ((DatePickerFragment)newFragment).setFragmentSetup(estimatedReturnDateTextView, stuff.getRentalDate());
+        ((DatePickerFragment)newFragment).setFragmentSetup(estimatedReturnDateTextView, stuff.getEstimatedReturnDate());
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 

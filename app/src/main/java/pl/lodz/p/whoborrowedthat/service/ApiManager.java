@@ -94,7 +94,7 @@ public class ApiManager {
         @SuppressLint("SimpleDateFormat") SimpleDateFormat a  = new SimpleDateFormat("dd-MM-YYYY");
         Call<Object> userCall = dataService.addBorrows(user.getToken(), user.getEmail(),
                 String.valueOf(user.getId()), String.valueOf(stuff.getBorrower().getId()),
-                stuff.getName(),a.format(stuff.getRentalDate()), a.format(stuff.getReturnDate()));
+                stuff.getName(),a.format(stuff.getRentalDate()), a.format(stuff.getEstimatedReturnDate()));
         userCall.enqueue(callback);
     }
 

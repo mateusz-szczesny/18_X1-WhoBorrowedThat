@@ -26,7 +26,6 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         super.onCreate(savedInstanceState);
 
         format = new SimpleDateFormat("dd.MM.YYYY", getResources().getConfiguration().locale);
-        date = new Date();
     }
 
     @NonNull

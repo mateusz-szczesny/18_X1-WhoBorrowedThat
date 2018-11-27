@@ -7,7 +7,7 @@
     tools:context=".controller.StuffAddActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/rentalDateButton"
         android:layout_width="97dp"
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
@@ -31,10 +31,10 @@
         android:fontFamily="@font/roboto_light"
         android:text="@string/show_date"
         android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="@+id/rentalDateButton"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/rentalDateButton" />
 
 
     <TextView
@@ -48,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/friendsSpinner" />
 
     <Button
-        android:id="@+id/returnDatePickerButton"
+        android:id="@+id/returnDateButton"
         android:layout_width="97dp"
         android:layout_height="30dp"
         android:layout_marginTop="24dp"
@@ -71,10 +71,10 @@
         android:fontFamily="@font/roboto_light"
         android:text="@string/show_date"
         android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="@+id/returnDatePickerButton"
+        app:layout_constraintEnd_toEndOf="@+id/returnDateButton"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/returnDatePickerButton" />
+        app:layout_constraintTop_toBottomOf="@+id/returnDateButton" />
 
 
     <TextView
