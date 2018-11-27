@@ -80,7 +80,7 @@ public class StuffAddActivity extends AppBaseActivity {
                     list.add(new UserSelection((int)relatedUser.getId(), relatedUser.getUsername()));
                 }
                 ArrayAdapter<UserSelection> dataAdapter = new ArrayAdapter<UserSelection>(getApplicationContext(),
-                        android.R.layout.simple_spinner_item, list);
+                        R.layout.spinner_item, list);
                 dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 friendsSpinner.setAdapter(dataAdapter);
             }

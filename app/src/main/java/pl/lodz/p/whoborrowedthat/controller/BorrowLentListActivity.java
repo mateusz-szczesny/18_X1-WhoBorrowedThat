@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import pl.lodz.p.whoborrowedthat.R;
 import pl.lodz.p.whoborrowedthat.command.SearchCommand;
@@ -19,7 +20,7 @@ public class BorrowLentListActivity extends AppBaseActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     private ViewPager mViewPager;
-    private Button searchButton;
+    private ImageButton searchButton;
     private EditText searchText;
 
 

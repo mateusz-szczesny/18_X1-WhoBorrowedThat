@@ -16,6 +16,8 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="@string/name"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="Autofill,LabelFor" />
@@ -27,6 +29,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/button"
+        android:background="@color/colorAccent"
+        android:fontFamily="@font/roboto_light"
+        android:textColor="@android:color/black"
         app:layout_constraintStart_toStartOf="@+id/usernameEditText"
         app:layout_constraintTop_toBottomOf="@+id/usernameEditText" />
 </android.support.constraint.ConstraintLayout>
