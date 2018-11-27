@@ -33,7 +33,7 @@
     <string name="to">to</string>
     <string name="you_lent">You lent</string>
     <string name="who_borrowed">who borrowed</string>
-    <string name="return_date_capitalized">Return date</string>
+    <string name="return_date_capitalized">Est. return date</string>
     <string name="lent_lower">lent</string>
     <string name="lent_date">Lent date</string>
     <string name="you_borrowed">You borrowed</string>
