@@ -41,6 +41,7 @@ public class LentStuffDetailActivity extends AppBaseActivity {
     private SimpleDateFormat dateFormat;
     private Button sendRemainder;
     private Button changeDateBtn;
+    private Button returnItemBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class LentStuffDetailActivity extends AppBaseActivity {
         returnDate = findViewById(R.id.returnDate);
         borrowerName = findViewById(R.id.borrowerName);
         changeDateBtn = findViewById(R.id.changeDateBtn);
+        returnItemBtn
 
         dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
