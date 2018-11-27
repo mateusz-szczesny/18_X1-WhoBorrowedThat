@@ -122,14 +122,15 @@ public class LentStuffDetailActivity extends AppBaseActivity {
         newFragment.show();
     }
 
-    public void callForNewDate(Date date) {
+    public void callForNewDate(final Date date) {
         User currentUser = SharedPrefHelper.getUserFormSP(getApplication());
         ApiManager.getInstance().changeEstimatedReturnDate(currentUser, stuff.getId(), date, new Callback<Void>() {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                 Toast.makeText(LentStuffDetailActivity.this,
-                        "Date will be changed!"
+                        "Date changed!"
                         , Toast.LENGTH_LONG).show();
+                returnDate.setText(new SimpleDateFormat("dd.MM.yyyy").format(date));
             }
 
             @Override
