@@ -66,17 +66,19 @@ public class LentViewModel extends AndroidViewModel {
         if(searchText == null && searchText.equals("")) {
             allLents.setValue(allStuffs);
         } else {
-            Pattern pattern = Pattern.compile(searchText.toLowerCase());
-            List<Stuff> searchLents = new ArrayList<>();
-            for (Stuff stuff : allStuffs) {
-                if (stuff.getName() != null) {
-                    Matcher matcher = pattern.matcher(stuff.getName().toLowerCase());
-                    if(matcher.find()) {
-                        searchLents.add(stuff);
+            if (allStuffs != null) {
+                Pattern pattern = Pattern.compile(searchText.toLowerCase());
+                List<Stuff> searchLents = new ArrayList<>();
+                for (Stuff stuff : allStuffs) {
+                    if (stuff.getName() != null) {
+                        Matcher matcher = pattern.matcher(stuff.getName().toLowerCase());
+                        if(matcher.find()) {
+                            searchLents.add(stuff);
+                        }
                     }
                 }
+                allLents.setValue(searchLents);
             }
-            allLents.setValue(searchLents);
         }
     }
 }

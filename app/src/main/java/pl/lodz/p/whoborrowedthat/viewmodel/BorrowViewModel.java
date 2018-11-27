@@ -67,17 +67,19 @@ public class BorrowViewModel extends AndroidViewModel {
         if(searchText == null && searchText.equals("")) {
             allBorrows.setValue(allStuffs);
         } else {
-            Pattern pattern = Pattern.compile(searchText.toLowerCase());
-            List<Stuff> searchBorrows = new ArrayList<>();
-            for (Stuff stuff : allStuffs) {
-                if (stuff.getName() != null) {
-                    Matcher matcher = pattern.matcher(stuff.getName().toLowerCase());
-                    if(matcher.find()) {
-                        searchBorrows.add(stuff);
+            if (allStuffs != null) {
+                Pattern pattern = Pattern.compile(searchText.toLowerCase());
+                List<Stuff> searchBorrows = new ArrayList<>();
+                for (Stuff stuff : allStuffs) {
+                    if (stuff.getName() != null) {
+                        Matcher matcher = pattern.matcher(stuff.getName().toLowerCase());
+                        if(matcher.find()) {
+                            searchBorrows.add(stuff);
+                        }
                     }
                 }
+                allBorrows.setValue(searchBorrows);
             }
-            allBorrows.setValue(searchBorrows);
         }
     }
 }

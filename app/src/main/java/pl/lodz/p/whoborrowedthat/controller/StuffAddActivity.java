@@ -92,28 +92,35 @@ public class StuffAddActivity extends AppBaseActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                stuff.setName(nameEditText.getText().toString());
+                String itemName = nameEditText.getText().toString();
                 UserSelection selectedUser = (UserSelection) friendsSpinner.getSelectedItem();
-                stuff.getBorrower().setId(selectedUser.getId());
+                if (itemName != null && selectedUser != null && stuff != null) {
+                    stuff.setName(itemName);
+                    stuff.getBorrower().setId(selectedUser.getId());
 
-                getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                ApiManager.getInstance().addBorrows(SharedPrefHelper.getUserFormSP(getApplication()), stuff, new Callback<Object>() {
-                    @Override
-                    public void onResponse(@NonNull Call<Object> call, @NonNull Response<Object> response) {
-                        Toast.makeText(StuffAddActivity.this,
-                                "Borrow added!"
-                                , Toast.LENGTH_LONG).show();
-                        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                        finish();
-                    }
+                    getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                    ApiManager.getInstance().addBorrows(SharedPrefHelper.getUserFormSP(getApplication()), stuff, new Callback<Object>() {
+                        @Override
+                        public void onResponse(@NonNull Call<Object> call, @NonNull Response<Object> response) {
+                            Toast.makeText(StuffAddActivity.this,
+                                    "Borrow added!"
+                                    , Toast.LENGTH_LONG).show();
+                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                            finish();
+                        }
 
-                    @Override
-                    public void onFailure(@NonNull Call<Object> call, @NonNull Throwable t) {
-                        Log.d("ERROR", t.getMessage());
-                        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                    }
-                });
+                        @Override
+                        public void onFailure(@NonNull Call<Object> call, @NonNull Throwable t) {
+                            Log.d("ERROR", t.getMessage());
+                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                        }
+                    });
+                } else {
+                    Toast.makeText(StuffAddActivity.this,
+                            "Fill all fields"
+                            , Toast.LENGTH_LONG).show();
+                }
             }
         });
 
