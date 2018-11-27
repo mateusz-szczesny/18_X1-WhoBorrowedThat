@@ -121,4 +121,10 @@ public class ApiManager {
         Call<Void> queue = dataService.changeReturnDate(borrowID, user.getToken(), user.getEmail(), a.format(newDate));
         queue.enqueue(callback);
     }
+
+    public void returnItem(User user, long borrowID, Date date, Callback<Void> callback) {
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat a  = new SimpleDateFormat("dd-MM-YYYY");
+        Call<Void> queue = dataService.returnItem(borrowID, user.getToken(), user.getEmail(), a.format(date));
+        queue.enqueue(callback);
+    }
 }

@@ -3,6 +3,7 @@ package pl.lodz.p.whoborrowedthat.adapter;
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -47,12 +48,20 @@ public class LentRecyclerViewAdapter extends RecyclerView.Adapter<LentRecyclerVi
     public void onBindViewHolder(@NonNull LentRecyclerViewAdapter.ViewHolder holder, final int position) {
         if (stuffs != null) {
             final Stuff current = stuffs.get(position);
-            Date now = new Date();
-            Date returnDate = current.getEstimatedReturnDate();
-            Date diff = new Date(returnDate.getTime() - now.getTime());
-            holder.daysLeft.setText(String.valueOf(diff.getTime() / (24 * 3600000)));
+            if (current.getReturnDate() == null) {
+                Date now = new Date();
+                Date returnDate = current.getEstimatedReturnDate();
+                Date diff = new Date(returnDate.getTime() - now.getTime());
+                holder.daysLeft.setText(String.valueOf(diff.getTime() / (24 * 3600000)));
 
-            holder.content.setText(current.getName());
+                holder.content.setText(current.getName());
+            } else {
+                holder.daysLeft.setText("");
+                holder.daysLeftTitle.setText("");
+                holder.content.setText(current.getName());
+                holder.content.setPaintFlags(holder.content.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            }
+
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -83,12 +92,14 @@ public class LentRecyclerViewAdapter extends RecyclerView.Adapter<LentRecyclerVi
     class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView content;
         private final TextView daysLeft;
+        private final TextView daysLeftTitle;
 
 
         private ViewHolder(View itemView) {
             super(itemView);
             content = itemView.findViewById(R.id.content);
             daysLeft = itemView.findViewById(R.id.numberOfDaysLeft);
+            daysLeftTitle = itemView.findViewById(R.id.daysLeftTitle);
         }
     }
 }
