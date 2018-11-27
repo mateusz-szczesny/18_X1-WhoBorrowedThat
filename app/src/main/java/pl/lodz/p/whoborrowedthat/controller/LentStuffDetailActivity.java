@@ -2,6 +2,7 @@ package pl.lodz.p.whoborrowedthat.controller;
 
 import android.support.annotation.NonNull;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 
 import pl.lodz.p.whoborrowedthat.R;
+import pl.lodz.p.whoborrowedthat.features.DatePickerFragment;
 import pl.lodz.p.whoborrowedthat.helper.SharedPrefHelper;
 import pl.lodz.p.whoborrowedthat.model.Stuff;
 import pl.lodz.p.whoborrowedthat.model.User;
@@ -28,6 +30,7 @@ public class LentStuffDetailActivity extends AppBaseActivity {
     private TextView borrowerName;
     private SimpleDateFormat dateFormat;
     private Button sendRemainder;
+    private Button changeDateBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,7 @@ public class LentStuffDetailActivity extends AppBaseActivity {
         borrowDate = findViewById(R.id.borrowDate);
         returnDate = findViewById(R.id.returnDate);
         borrowerName = findViewById(R.id.borrowerName);
+        changeDateBtn = findViewById(R.id.changeDateBtn);
 
         dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
@@ -67,6 +71,29 @@ public class LentStuffDetailActivity extends AppBaseActivity {
             }
         });
 
+        changeDateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialogForReturnDate(v);
+                User currentUser = SharedPrefHelper.getUserFormSP(getApplication());
+                ApiManager.getInstance().changeEstimatedReturnDate(currentUser, stuff.getId(), stuff.getEstimatedReturnDate(), new Callback<Void>() {
+                    @Override
+                    public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                        Toast.makeText(LentStuffDetailActivity.this,
+                                "Date will be changed!"
+                                , Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Toast.makeText(LentStuffDetailActivity.this,
+                                "Cannot change the date :("
+                                , Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
+
         if (bundle != null && bundle.getSerializable(STUFF_BUNDLE__KEY) != null) {
             stuff = (Stuff) bundle.getSerializable(STUFF_BUNDLE__KEY);
             itemName.setText(stuff.getName());
@@ -77,5 +104,11 @@ public class LentStuffDetailActivity extends AppBaseActivity {
                     stuff.getBorrower().getLastName();
             borrowerName.setText(ownerNameStringBuilder);
         }
+    }
+
+    public void showDatePickerDialogForReturnDate(View v) {
+        DialogFragment newFragment = new DatePickerFragment();
+        ((DatePickerFragment)newFragment).setFragmentSetup(null, stuff.getEstimatedReturnDate());
+        newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 }

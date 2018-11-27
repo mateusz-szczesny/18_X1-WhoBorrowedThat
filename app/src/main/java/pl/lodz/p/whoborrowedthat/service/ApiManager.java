@@ -3,6 +3,7 @@ package pl.lodz.p.whoborrowedthat.service;
 import android.annotation.SuppressLint;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
@@ -112,6 +113,12 @@ public class ApiManager {
 
     public void updateUsername(User user, String username, Callback<Void> callback) {
         Call<Void> queue = authService.setUsername(user.getToken(), user.getEmail(), username);
+        queue.enqueue(callback);
+    }
+
+    public void changeEstimatedReturnDate(User user, long borrowID, Date newDate, Callback<Void> callback) {
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat a  = new SimpleDateFormat("dd-MM-YYYY");
+        Call<Void> queue = dataService.changeReturnDate(borrowID, user.getToken(), user.getEmail(), a.format(newDate));
         queue.enqueue(callback);
     }
 }

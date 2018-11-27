@@ -69,4 +69,13 @@ interface DataApi {
             @Header("X-User-Token") String token,
             @Header("X-User-Email") String email
     );
+
+    @PUT("v1/borrows/{id}")
+    @FormUrlEncoded
+    Call<Void> changeReturnDate(
+            @Path("id") long borrowID,
+            @Header("X-User-Token") String token,
+            @Header("X-User-Email") String email,
+            @Field("estimated_return_date") String estimatedReturnDate
+    );
 }
